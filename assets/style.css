@@ -21,9 +21,20 @@ body {
 .bg__primary {
   background-color: #011537;
 }
+
+.bg__primary--white {
+  background-color: #ffffff;
+  color: #011537 !important;
+}
 .btn__round {
 }
 
 .site_img {
   margin-bottom: -40px;
+}
+
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none;
 }

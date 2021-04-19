@@ -1,9 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light">
+  <nav class="navbar navbar-expand-md" :class="{ 'navbar-light': !color }">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="/img/logo-alt 1.png" alt="" />
-      </a>
+      <Logo />
       <button
         class="navbar-toggler"
         type="button"
@@ -35,7 +33,22 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    color: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  created() {
+    console.log(this.color)
+  },
+}
 </script>
 
-<style></style>
+<style>
+.navbar .navbar-nav a.nav-link {
+  color: #011537;
+}
+</style>

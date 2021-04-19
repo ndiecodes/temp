@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <section class="pb-5">
       <Nuxt />
     </section>
