@@ -1,0 +1,29 @@
+body {
+  color: #303030;
+}
+.header {
+  background: no-repeat center center;
+  width: 100%;
+  color: #ffffff !important;
+}
+
+.b-radius {
+  border-radius: 0.5rem;
+}
+
+.banner {
+  padding: 0rem 1rem 5rem 1rem;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+  color: #ffffff !important;
+}
+.bg__primary {
+  background-color: #011537;
+}
+.btn__round {
+}
+
+.site_img {
+  margin-bottom: -40px;
+}
