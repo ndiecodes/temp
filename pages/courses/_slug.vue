@@ -260,9 +260,7 @@
 </template>
 
 <script>
-export default {
-  layout: 'single',
-}
+export default {}
 </script>
 
 <style scoped>
