@@ -1,7 +1,7 @@
 <template>
   <header class="bg__primary header">
     <div class="container pt-2">
-      <Nav />
+      <!-- <Nav /> -->
       <Banner />
     </div>
   </header>

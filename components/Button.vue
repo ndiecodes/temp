@@ -6,7 +6,12 @@
 
 <script>
 export default {
-  props: ['link'],
+  props: {
+    link: {
+      type: String,
+      default: '#',
+    },
+  },
 }
 </script>
 
