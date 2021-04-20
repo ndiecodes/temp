@@ -26,6 +26,30 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Get Started</a>
           </li>
+          <li class="nav-item dropdown">
+            <a
+              id="navbarDropdownMenuLink"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
+                width="40"
+                height="40"
+                class="rounded-circle"
+              />
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="/dashboard">Dashboard</a>
+              <a class="dropdown-item" href="#">Edit Profile</a>
+              <li><hr class="dropdown-divider" /></li>
+              <a class="dropdown-item" href="#">Log Out</a>
+            </ul>
+          </li>
         </ul>
       </div>
     </div>
@@ -39,10 +63,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-
-  created() {
-    console.log(this.color)
   },
 }
 </script>
