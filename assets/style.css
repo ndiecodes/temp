@@ -33,6 +33,10 @@ body {
   margin-bottom: -40px;
 }
 
+button {
+  padding: 2rem;
+}
+
 button:focus,
 button:active {
   outline: none !important;

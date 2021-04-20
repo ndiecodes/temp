@@ -17,9 +17,7 @@
         </div>
       </div>
       <div>
-        <a href="#" class="btn btn-light btn__round rounded-pill px-3 mt-4"
-          >Start Learning Now</a
-        >
+        <Button link="#">Start Learning Now</Button>
       </div>
     </div>
   </div>

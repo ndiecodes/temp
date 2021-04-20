@@ -6,9 +6,7 @@
       <p class="mt-4">
         Everything you need to know to earn passive income from cryptocurrency
       </p>
-      <a href="/courses" class="btn btn-light btn__round rounded-pill px-4 mt-4"
-        >Browse Courses</a
-      >
+      <Button link="/courses"> Browse Courses </Button>
     </div>
 
     <div class="col-md-6">
