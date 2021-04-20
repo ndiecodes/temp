@@ -2,9 +2,9 @@
   <div class="row text-center justify-content-center">
     <div class="m-5 p-5 bg__primary header">
       <div class="pr-5 pl-5">
-        <h1>Laravel 8 From Scratch</h1>
+        <h1 class="text-white">Laravel 8 From Scratch</h1>
 
-        <p class="mt-4">
+        <p class="mt-4 text-white">
           We don't learn tools for the sake of learning tools. Instead, we learn
           them because they help us accomplish a particular goal.
         </p>

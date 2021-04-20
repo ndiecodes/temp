@@ -20,6 +20,7 @@ body {
 }
 .bg__primary {
   background-color: #011537;
+  color: white !important;
 }
 
 .bg__primary--white {
@@ -41,4 +42,22 @@ button:focus,
 button:active {
   outline: none !important;
   box-shadow: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.card1:hover {
+  box-shadow: 0 14px 25px rgb(0 0 0 / 20%) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #011537;
 }

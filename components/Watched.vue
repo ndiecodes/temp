@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-4 py-3">
-    <div class="card shadow border-0 b-radius">
+    <div class="card card1 shadow border-0 b-radius">
       <img
         src="https://res.cloudinary.com/mezie/image/upload/v1527784441/learn-adonisjs/Learn_AdonisJs_from_zero_to_deploy_j5t6kd.png"
         alt=""

@@ -1,9 +1,9 @@
 <template>
   <div class="row banner">
     <div class="col-md-6 pt-5 mt-5 pb-4">
-      <h1>Become a Certified Crypto Trader</h1>
+      <h1 class="text-white">Become a Certified Crypto Trader</h1>
 
-      <p class="mt-4">
+      <p class="mt-4 text-white">
         Everything you need to know to earn passive income from cryptocurrency
       </p>
       <Button link="/courses"> Browse Courses </Button>
