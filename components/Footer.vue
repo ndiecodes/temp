@@ -37,7 +37,7 @@
       </div>
 
       <div class="mt-5 p-4">
-        <p>© 2021 Blockvila. All Rights Reserved.</p>
+        <p class="text-white">© 2021 Blockvila. All Rights Reserved.</p>
       </div>
     </div>
   </footer>
