@@ -35,14 +35,18 @@ export default {
     ],
   },
 
+  serverMiddleware: {
+    '/api': '~/api',
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/style.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/repository.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: ['~/components', { path: '~/components/form', prefix: '' }],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -56,7 +60,45 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
+
+  auth: {
+    redirect: {
+      login: '/login',
+      // logout: "/logout",
+      home: '/dashboard',
+    },
+    strategies: {
+      local: {
+        // scheme: 'refresh',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 5,
+        },
+        // refreshToken: {
+        //   property: 'token',
+        //   data: 'token',
+        //   maxAge: 60 * 60 * 24 * 30,
+        //   tokenRequired: true,
+        // },
+        endpoints: {
+          login: { url: '/api/v1/auth/login', method: 'post' },
+          logout: { url: '/api/v1/auth/logout', method: 'post' },
+          user: { url: '/api/v1/user', method: 'get' },
+          // refresh: { url: 'auth/refresh', method: 'post' },
+        },
+
+        user: {
+          property: 'user',
+          autoFetch: true,
+        },
+        autoLogout: false,
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-md" :class="{ 'navbar-light': !color }">
     <div class="container-fluid">
-      <Logo />
+      <!-- <Logo /> -->
       <button
         class="navbar-toggler"
         type="button"
@@ -15,18 +15,21 @@
       </button>
       <div id="navbarNav" class="collapse navbar-collapse flex-grow-0">
         <ul class="navbar-nav">
-          <li class="nav-item me-4">
+          <li v-if="!isAuthenticated" class="nav-item me-4">
             <a class="nav-link active" aria-current="page" href="#"
               ><i class="fas fa-search"></i
             ></a>
           </li>
-          <li class="nav-item me-2">
-            <a class="nav-link" href="#">Sign In</a>
+          <li v-if="!isAuthenticated" class="nav-item me-2">
+            <nuxt-link class="nav-link" to="/login">Sign In</nuxt-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Get Started</a>
+          <li v-if="!isAuthenticated" class="nav-item me-2">
+            <nuxt-link class="nav-link" to="/register">Get Started</nuxt-link>
           </li>
-          <li class="nav-item dropdown">
+          <li v-if="isAuthenticated" class="nav-item me-4">
+            <nuxt-link class="nav-link" to="/courses">Courses</nuxt-link>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item dropdown">
             <a
               id="navbarDropdownMenuLink"
               class="nav-link dropdown-toggle"
@@ -44,8 +47,12 @@
               />
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/dashboard">Dashboard</a>
-              <a class="dropdown-item" href="#">Edit Profile</a>
+              <nuxt-link class="dropdown-item" to="/dashboard"
+                >Dashboard</nuxt-link
+              >
+              <nuxt-link class="dropdown-item" to="/dashboard"
+                >Edit Profile</nuxt-link
+              >
               <li><hr class="dropdown-divider" /></li>
               <a class="dropdown-item" href="#">Log Out</a>
             </ul>
@@ -62,6 +69,14 @@ export default {
     color: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$auth.loggedIn
+    },
+    user() {
+      return this.$auth.user
     },
   },
 }
