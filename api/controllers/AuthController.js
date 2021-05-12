@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const User = require(path.join(__dirname, '../models')).User
 // const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
+const Vimeo = require('../services/Vimeo')
 // const { Op } = require('sequelize')
 // const jwtDecode = require('jwt-decode')
 // const Mail = require('../config/mail')
@@ -37,6 +38,9 @@ class Auth {
 
   static async login(req, res) {
     const { email, password } = req.body
+
+    const vimeo = new Vimeo()
+    vimeo.all()
 
     const user = await User.scope('withPassword').findOne({
       where: {

@@ -260,7 +260,10 @@
 </template>
 
 <script>
-export default {}
+export default {
+  middleware: ['auth'],
+  auth: false,
+}
 </script>
 
 <style scoped>
