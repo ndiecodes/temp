@@ -22,7 +22,7 @@ const authRoutes = require('./routes/auth.js')
 
 // Import API Routes
 app.use('/v1/auth', authRoutes)
-app.use('/v1/*', passport.authenticate('jwt', { session: false }))
+app.use('/v1/secure/*', passport.authenticate('jwt', { session: false }))
 require(path.join(__dirname, './routes/secure.js'))(app)
 
 // Export express app

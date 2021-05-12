@@ -1,4 +1,4 @@
-const resource = '/channels'
+const resource = '/api/v1/courses'
 export default ($axios) => ({
   index() {
     return $axios
@@ -23,18 +23,5 @@ export default ($axios) => ({
 
   delete(id) {
     return $axios.delete(`${resource}/${id}`)
-  },
-
-  connected() {
-    return $axios
-      .get(`${resource}/connected`)
-      .then((response) => response.data)
-      .catch((error) => Promise.reject(error.response))
-  },
-  connect(data) {
-    return $axios
-      .post(`${resource}/connect`, data)
-      .then((response) => response.data)
-      .catch((error) => Promise.reject(error.response))
   },
 })

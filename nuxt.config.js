@@ -98,7 +98,7 @@ export default {
         endpoints: {
           login: { url: '/api/v1/auth/login', method: 'post' },
           logout: { url: '/api/v1/auth/logout', method: 'post' },
-          user: { url: '/api/v1/user', method: 'get' },
+          user: { url: '/api/v1/secure/user', method: 'get' },
           // refresh: { url: 'auth/refresh', method: 'post' },
         },
 

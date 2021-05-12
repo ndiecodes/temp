@@ -16,20 +16,59 @@ class Vimeo {
     )
   }
 
+  // Upload Video
+
+  // uploadVideo() {
+  //   return new Promise((resolve, reject) => {
+  //     this.client.request(
+  //       {
+  //         method: 'GET',
+  //         path: `/users/${process.env.VIMEO_USER_ID}/albums`,
+  //       },
+  //       function (error, body) {
+  //         if (error) {
+  //           reject(error)
+  //         }
+  //         resolve(body)
+  //       }
+  //     )
+  //   })
+  // }
+
+  // Create Category
+
   all() {
-    this.client.request(
-      {
-        method: 'GET',
-        path: '/tutorial',
-      },
-      // eslint-disable-next-line camelcase
-      function (error, body, status_code, headers) {
-        if (error) {
-          console.log(error, status_code)
+    return new Promise((resolve, reject) => {
+      this.client.request(
+        {
+          method: 'GET',
+          path: `/users/${process.env.VIMEO_USER_ID}/albums`,
+        },
+        function (error, body) {
+          if (error) {
+            reject(error)
+          }
+          resolve(body)
         }
-        console.log(body, status_code)
-      }
-    )
+      )
+    })
+  }
+
+  allVideosInFolder(folderId) {
+    return new Promise((resolve, reject) => {
+      this.client.request(
+        {
+          method: 'GET',
+          path: `/users/${process.env.VIMEO_USER_ID}/projects/${folderId}/videos`,
+        },
+        function (error, body) {
+          if (error) {
+            reject(error)
+          }
+          resolve(body)
+        }
+      )
+    })
   }
 }
 
