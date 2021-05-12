@@ -39,6 +39,10 @@ export default {
         // async: true,
         defer: true,
       },
+
+      {
+        src: 'https://player.vimeo.com/api/player.js',
+      },
     ],
   },
 

@@ -39,7 +39,7 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
@@ -77,21 +77,21 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
@@ -121,28 +121,28 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
@@ -173,28 +173,28 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
@@ -225,28 +225,28 @@
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span>
                     <i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
                 <div class="d-flex justify-content-between mt-1 mb-4">
                   <span
                     ><i class="fas fa-play"></i>
-                    <nuxt-link to="/">Introduction</nuxt-link></span
+                    <nuxt-link to="lessons/test">Introduction</nuxt-link></span
                   >
                   <span> 3:30</span>
                 </div>
