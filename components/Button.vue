@@ -1,7 +1,7 @@
 <template>
-  <a :href="link" class="btn btn-light btn__round rounded-pill px-4 mt-4"
+  <nuxt-link :to="link" class="btn btn-light btn__round rounded-pill px-4 mt-4"
     ><slot
-  /></a>
+  /></nuxt-link>
 </template>
 
 <script>

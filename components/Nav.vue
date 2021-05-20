@@ -13,21 +13,25 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div id="navbarNav" class="collapse navbar-collapse flex-grow-0">
-        <ul class="navbar-nav">
-          <li class="nav-item me-4">
-            <a class="nav-link active" aria-current="page" href="#"
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
+          <li v-if="!isAuthenticated" class="nav-item me-4">
+            <nuxt-link class="nav-link active" aria-current="page" to="/"
               ><i class="fas fa-search"></i
-            ></a>
+            ></nuxt-link>
           </li>
-          <li class="nav-item me-2">
-            <a class="nav-link" href="#">Sign In</a>
+          <li v-if="!isAuthenticated" class="nav-item me-2">
+            <nuxt-link class="nav-link" to="/login">Sign In</nuxt-link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Get Started</a>
+          <li v-if="!isAuthenticated" class="nav-item me-2">
+            <nuxt-link class="nav-link" to="/register">Get Started</nuxt-link>
           </li>
-          <li class="nav-item dropdown">
-            <a
+          <li v-if="isAuthenticated" class="nav-item me-4">
+            <nuxt-link class="nav-link" to="/courses">Courses</nuxt-link>
+          </li>
+          <li v-if="isAuthenticated" class="nav-item dropdown">
+            <nuxt-link
               id="navbarDropdownMenuLink"
               class="nav-link dropdown-toggle"
               href="#"
@@ -35,6 +39,7 @@
               data-bs-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
+              to="#"
             >
               <img
                 src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"
@@ -42,10 +47,14 @@
                 height="40"
                 class="rounded-circle"
               />
-            </a>
+            </nuxt-link>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/dashboard">Dashboard</a>
-              <a class="dropdown-item" href="#">Edit Profile</a>
+              <nuxt-link class="dropdown-item" to="dashboard"
+                >Dashboard</nuxt-link
+              >
+              <nuxt-link class="dropdown-item" to="dashboard"
+                >Edit Profile</nuxt-link
+              >
               <li><hr class="dropdown-divider" /></li>
               <a class="dropdown-item" href="#">Log Out</a>
             </ul>
@@ -62,6 +71,14 @@ export default {
     color: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$auth.loggedIn
+    },
+    user() {
+      return this.$auth.user
     },
   },
 }

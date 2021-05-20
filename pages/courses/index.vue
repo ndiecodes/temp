@@ -8,7 +8,22 @@
 </template>
 
 <script>
-export default {}
+export default {
+  middleware: ['auth'],
+  auth: false,
+
+  async asyncData({ store }) {
+    try {
+      const getCourses = store.getters['course/getCourses']
+      const courses = getCourses()
+      if (!courses.length) {
+        await store.dispatch('course/getCourses')
+      }
+    } catch (error) {
+      console.log(error, 'error')
+    }
+  },
+}
 </script>
 
 <style></style>

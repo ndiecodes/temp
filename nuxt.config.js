@@ -1,4 +1,11 @@
+require('dotenv').config()
 export default {
+  env: {
+    VIMEO_CLIENT_ID: process.env.VIMEO_CLIENT_ID,
+    VIMEO_CLIENT_SECRET: process.env.VIMEO_CLIENT_SECRET,
+    VIMEO_ACCESS_TOKEN: process.env.VIMEO_ACCESS_TOKEN,
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'blockvilla',
@@ -18,6 +25,14 @@ export default {
           'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css',
       },
 
+      { rel: 'stylesheet', href: '/adminlte.css' },
+
+      {
+        rel: 'stylesheet',
+        href:
+          'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
+      },
+
       {
         rel: 'stylesheet',
         href:
@@ -32,17 +47,37 @@ export default {
         // async: true,
         defer: true,
       },
+
+      {
+        src: 'https://player.vimeo.com/api/player.js',
+      },
+
+      {
+        src: '/plugins/jquery/jquery.min.js',
+      },
+
+      {
+        src: '/plugins/bootstrap/js/bootstrap.bundle.min.js',
+      },
+
+      {
+        src: '/adminlte.js',
+      },
     ],
+  },
+
+  serverMiddleware: {
+    '/api': '~/api',
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/style.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/repository.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: ['~/components', { path: '~/components/form', prefix: '' }],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -56,7 +91,45 @@ export default {
     'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
   ],
+
+  auth: {
+    redirect: {
+      login: '/login',
+      // logout: "/logout",
+      home: '/dashboard',
+    },
+    strategies: {
+      local: {
+        // scheme: 'refresh',
+        token: {
+          property: 'token',
+          required: true,
+          type: 'Bearer',
+          maxAge: 5,
+        },
+        // refreshToken: {
+        //   property: 'token',
+        //   data: 'token',
+        //   maxAge: 60 * 60 * 24 * 30,
+        //   tokenRequired: true,
+        // },
+        endpoints: {
+          login: { url: '/api/v1/auth/login', method: 'post' },
+          logout: { url: '/api/v1/auth/logout', method: 'post' },
+          user: { url: '/api/v1/secure/user', method: 'get' },
+          // refresh: { url: 'auth/refresh', method: 'post' },
+        },
+
+        user: {
+          property: 'user',
+          autoFetch: true,
+        },
+        autoLogout: false,
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

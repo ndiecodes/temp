@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-4 py-3">
     <div class="card1 shadow rounded border-0">
-      <nuxt-link to="/courses/test">
+      <nuxt-link :to="'/courses/' + course.id">
         <div class="card">
           <img
             src="https://res.cloudinary.com/mezie/image/upload/v1527784441/learn-adonisjs/Learn_AdonisJs_from_zero_to_deploy_j5t6kd.png"
@@ -10,11 +10,10 @@
         </div>
       </nuxt-link>
       <div class="px-3 py-4">
-        <nuxt-link to="/courses/test">
-          <h4>Laravel 8 From Scratch</h4>
+        <nuxt-link :to="'/courses/' + course.id">
+          <h4>{{ course.title }}</h4>
           <p class="mt-2">
-            We don't learn tools for the sake of learning tools. Instead, we
-            learn them because they help us accomplish a particular goal...
+            {{ course.description }}
           </p>
         </nuxt-link>
         <div class="d-flex justify-content-between text-black-50 mt-1">
@@ -30,7 +29,14 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    course: {
+      type: Object,
+      default: () => {},
+    },
+  },
+}
 </script>
 
 <style scoped>
