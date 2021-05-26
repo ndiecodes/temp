@@ -3,9 +3,8 @@ const bcrypt = require('bcrypt')
 const User = require(path.join(__dirname, '../models')).User
 // const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const Vimeo = require('../services/Vimeo')
 // const { Op } = require('sequelize')
-// const jwtDecode = require('jwt-decode')
+const jwtDecode = require('jwt-decode')
 // const Mail = require('../config/mail')
 // const forgotPassword = require('../../templates/mail/forgotPassword')
 
@@ -38,10 +37,6 @@ class Auth {
 
   static async login(req, res) {
     const { email, password } = req.body
-
-    const vimeo = new Vimeo()
-    vimeo.all()
-
     const user = await User.scope('withPassword').findOne({
       where: {
         email,
@@ -168,10 +163,12 @@ class Auth {
 
   static user(req, res) {
     if (req.user) {
+      const user = req.user
+      delete user.password
       return res.status(200).json({
         success: true,
         message: 'User retrieved successfully',
-        user: req.user,
+        user,
       })
     }
     return res.status(401).json({
@@ -180,26 +177,25 @@ class Auth {
     })
   }
 
-  //   static async refresh(req, res) {
-  //     const { token } = req.body
-  //     const payload = jwtDecode(token)
-  //     console.log(payload)
-  //     const user = await User.findOne({ where: { id: payload.id } })
-  //     if (user) {
-  //       const payload = {
-  //         id: user.id,
-  //       }
-  //       const token = jwt.sign(payload, process.env.SECRET)
-  //       delete user.password
-  //       return res.json({
-  //         success: true,
-  //         message: 'Logged in successfully',
-  //         user,
-  //         token,
-  //         tokenType: 'Brearer ',
-  //       })
-  //     }
-  //   }
+  static async refresh(req, res) {
+    const { token } = req.body
+    const payload = jwtDecode(token)
+    const user = await User.findOne({ where: { id: payload.id } })
+    if (user) {
+      const payload = {
+        id: user.id,
+      }
+      const token = jwt.sign(payload, process.env.SECRET)
+      delete user.password
+      return res.json({
+        success: true,
+        message: 'Logged in successfully',
+        user,
+        token,
+        tokenType: 'Brearer ',
+      })
+    }
+  }
 
   //   static async deleteAccount(req, res) {
   //     const user = await User.findOne({ id: { id: req.body.id } })

@@ -23,8 +23,18 @@
           <span><i class="far fa-clock"></i> 10 hours</span>
           <span>Beginner</span>
         </div>
+        <button
+          v-if="edit"
+          type="button"
+          class="btn bg-gradient-info mt-3"
+          data-toggle="modal"
+          data-target="#upload-videos-modal"
+        >
+          Edit Videos
+        </button>
       </div>
     </div>
+    <EditVideo />
   </div>
 </template>
 
@@ -34,6 +44,10 @@ export default {
     course: {
       type: Object,
       default: () => {},
+    },
+    edit: {
+      type: Boolean,
+      default: false,
     },
   },
 }

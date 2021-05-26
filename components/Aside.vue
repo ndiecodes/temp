@@ -39,28 +39,19 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <nuxt-link
-              :to="{ name: 'dashboard-admin' }"
-              class="nav-link active"
-            >
+            <nuxt-link :to="{ name: 'admin' }" class="nav-link active">
               <i class="fas fa-tachometer-alt nav-icon"></i>
               <p>Dashboard</p>
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link
-              :to="{ name: 'dashboard-admin-categories' }"
-              class="nav-link"
-            >
+            <nuxt-link :to="{ name: 'admin-categories' }" class="nav-link">
               <i class="fas fa-file-alt nav-icon"></i>
               <p>Categories</p>
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link
-              :to="{ name: 'dashboard-admin-videos' }"
-              class="nav-link"
-            >
+            <nuxt-link :to="{ name: 'admin-videos' }" class="nav-link">
               <i class="fas fa-video nav-icon"></i>
               <p>Videos</p>
             </nuxt-link>

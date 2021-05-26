@@ -35,6 +35,11 @@ module.exports = {
       updatedAt: {
         type: Sequelize.DATE,
       },
+      roles: {
+        allowNull: false,
+        default: 'user',
+        type: Sequelize.STRING,
+      },
       reset_password_token: { type: Sequelize.STRING, allowNull: true },
       reset_password_expires: { type: Sequelize.DATE, allowNull: true },
     })

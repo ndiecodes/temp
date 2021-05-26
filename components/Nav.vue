@@ -86,6 +86,7 @@ export default {
 
 <style>
 .navbar .navbar-nav a.nav-link {
-  color: #011537;
+  color: #fff;
+  /* #011537; */
 }
 </style>

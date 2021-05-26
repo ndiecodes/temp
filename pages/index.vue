@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  middleware: ['auth'],
+  layout: 'default',
   auth: false,
 
   async asyncData({ store }) {

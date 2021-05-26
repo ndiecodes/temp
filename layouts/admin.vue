@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper">
-    <div
-      class="preloader flex-column justify-content-center align-items-center"
-    >
+    <!-- <div class="preloade flex-column justify-content-center align-items-center">
       <img
         class="animation__shake"
         src="/img/AdminLTELogo.png"
@@ -10,7 +8,7 @@
         height="60"
         width="60"
       />
-    </div>
+    </div> -->
 
     <Aside />
 
@@ -20,5 +18,8 @@
     <!-- <Footer /> -->
   </div>
 </template>
+<script>
+export default {}
+</script>
 
 <style></style>

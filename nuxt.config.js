@@ -74,7 +74,10 @@ export default {
   css: ['~/assets/style.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~plugins/repository.js'],
+  plugins: [
+    { src: '~plugins/repository.js' },
+    { src: '~/plugins/vuex-persist.client.js' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: ['~/components', { path: '~/components/form', prefix: '' }],
@@ -102,24 +105,24 @@ export default {
     },
     strategies: {
       local: {
-        // scheme: 'refresh',
+        scheme: 'refresh',
         token: {
           property: 'token',
           required: true,
           type: 'Bearer',
           maxAge: 5,
         },
-        // refreshToken: {
-        //   property: 'token',
-        //   data: 'token',
-        //   maxAge: 60 * 60 * 24 * 30,
-        //   tokenRequired: true,
-        // },
+        refreshToken: {
+          property: 'token',
+          data: 'token',
+          maxAge: 60 * 60 * 24 * 30,
+          tokenRequired: true,
+        },
         endpoints: {
           login: { url: '/api/v1/auth/login', method: 'post' },
           logout: { url: '/api/v1/auth/logout', method: 'post' },
           user: { url: '/api/v1/secure/user', method: 'get' },
-          // refresh: { url: 'auth/refresh', method: 'post' },
+          refresh: { url: '/api/v1/auth/refresh', method: 'post' },
         },
 
         user: {

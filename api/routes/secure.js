@@ -6,8 +6,9 @@ module.exports = (app) => {
   const router = Router()
   router.get('/secure/user', AuthController.user)
   router.get('/courses', CourseController.courses)
-  router.post('/courses', CourseController.uploadVideo)
-  router.post('/categories', CourseController.createCategory)
+  router.get('/secure/courses/all', CourseController.allCourses)
+  router.post('/secure/courses', CourseController.uploadVideo)
+  router.post('/secure/categories', CourseController.createCategory)
 
   app.use('/v1/', router)
 }

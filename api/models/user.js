@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       phone_number: DataTypes.STRING,
       reset_password_token: DataTypes.STRING,
       reset_password_expires: DataTypes.DATE,
+      roles: DataTypes.STRING,
     },
     {
       underscored: false,

@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "5.0.0-1620773067.c356fed",
+    "@nuxtjs/auth-next": "5.0.0-1607693598.34d83ea",
     "@nuxtjs/axios": "^5.13.1",
     "@vimeo/player": "^2.15.0",
     "bcrypt": "^5.0.1",
@@ -28,7 +28,9 @@
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "vimeo": "^2.1.1"
+    "slugify": "^1.5.3",
+    "vimeo": "^2.1.1",
+    "vuex-persistedstate": "*"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
