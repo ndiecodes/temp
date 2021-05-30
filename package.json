@@ -25,13 +25,12 @@
     "nuxt": "^2.15.3",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
-    "pg": "^8.6.0",
-    "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
     "slugify": "^1.5.3",
     "vimeo": "^2.1.1",
     "vuex-persistedstate": "*",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "mysql2": "^2.2.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
