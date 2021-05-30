@@ -30,7 +30,8 @@
     "sequelize": "^6.6.2",
     "slugify": "^1.5.3",
     "vimeo": "^2.1.1",
-    "vuex-persistedstate": "*"
+    "vuex-persistedstate": "*",
+    "sequelize-cli": "^6.2.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
@@ -47,7 +48,6 @@
     "jest": "^26.6.3",
     "mysql2": "^2.2.5",
     "prettier": "^2.2.1",
-    "sequelize-cli": "^6.2.0",
     "vue-jest": "^3.0.4"
   }
 }
