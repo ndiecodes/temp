@@ -4,9 +4,12 @@ module.exports = (sequelize, DataTypes) => {
   const Course = sequelize.define(
     'Course',
     {
-      name: DataTypes.STRING,
+      title: DataTypes.STRING,
       description: DataTypes.STRING,
-      current: DataTypes.STRING,
+      summary: DataTypes.STRING,
+      slug: DataTypes.STRING,
+      banner: DataTypes.STRING,
+      premium: DataTypes.BOOLEAN,
     },
     {
       underscored: false,
@@ -17,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   )
   Course.associate = function (models) {
     // associations can be defined here
-    // Course.hasMany(models.Course, {
-    //   foreignKey: 'use_id',
-    //   sourceKey: 'id',
-    // })
+    Course.hasMany(models.Video, {
+      foreignKey: 'category_id',
+      sourceKey: 'id',
+    })
   }
 
   return Course

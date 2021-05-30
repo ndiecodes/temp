@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       phone_number: DataTypes.STRING,
       reset_password_token: DataTypes.STRING,
       reset_password_expires: DataTypes.DATE,
+      roles: DataTypes.STRING,
     },
     {
       underscored: false,
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   )
   User.associate = function (models) {
     // associations can be defined here
-    User.hasMany(models.Course, {
+    User.hasMany(models.UserCourse, {
       foreignKey: 'user_id',
       sourceKey: 'id',
     })

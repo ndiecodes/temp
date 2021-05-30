@@ -12,13 +12,25 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      summary: {
+        allowNull: true,
+        type: Sequelize.TEXT,
+      },
       description: {
         type: Sequelize.TEXT,
         allowNull: true,
       },
-      current: {
-        type: Sequelize.STRING,
+      banner: {
+        type: Sequelize.TEXT,
         allowNull: true,
+      },
+      slug: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      premium: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,

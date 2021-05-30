@@ -11,10 +11,7 @@
 </template>
 
 <script>
-export default {
-  layout: 'dashboard',
-  middleware: ['auth'],
-}
+export default {}
 </script>
 
 <style lang="css" scoped></style>

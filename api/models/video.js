@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Video.belongsTo(models.Category, {
-        foreignKey: 'id',
+      Video.belongsTo(models.Course, {
+        foreignKey: 'category_id',
         targetKey: 'id',
       })
     }
@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       category_id: DataTypes.INTEGER,
       premium: DataTypes.BOOLEAN,
       section: DataTypes.STRING,
+      slug: DataTypes.STRING,
     },
     {
       sequelize,

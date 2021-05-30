@@ -6,8 +6,14 @@ module.exports = (app) => {
   const router = Router()
   router.get('/secure/user', AuthController.user)
   router.get('/courses', CourseController.courses)
-  router.post('/courses', CourseController.uploadVideo)
-  router.post('/categories', CourseController.createCategory)
+  router.get('/secure/courses/all', CourseController.allCourses)
+  router.post('/secure/videos', CourseController.uploadVideo)
+  router.post('/secure/courses', CourseController.createCategory)
+  router.get('/secure/videos', CourseController.videos)
+  router.put('/secure/courses/:id', CourseController.editCourse)
+  router.put('/secure/videos/:id', CourseController.editVideo)
+  router.patch('/secure/courses/:id', CourseController.editCourse)
+  router.patch('/secure/videos/:id', CourseController.editVideo)
 
   app.use('/v1/', router)
 }

@@ -49,14 +49,16 @@
               />
             </nuxt-link>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <nuxt-link class="dropdown-item" to="dashboard"
+              <nuxt-link class="dropdown-item" to="/dashboard"
                 >Dashboard</nuxt-link
               >
               <nuxt-link class="dropdown-item" to="dashboard"
                 >Edit Profile</nuxt-link
               >
               <li><hr class="dropdown-divider" /></li>
-              <a class="dropdown-item" href="#">Log Out</a>
+              <a class="dropdown-item" href="#" @click.prevent="logout"
+                >Log Out</a
+              >
             </ul>
           </li>
         </ul>
@@ -81,11 +83,18 @@ export default {
       return this.$auth.user
     },
   },
+
+  methods: {
+    async logout() {
+      await this.$auth.logout(/* .... */)
+    },
+  },
 }
 </script>
 
 <style>
 .navbar .navbar-nav a.nav-link {
-  color: #011537;
+  color: #fff;
+  /* #011537; */
 }
 </style>
