@@ -16,7 +16,7 @@
                   <nuxt-link to="/">Home</nuxt-link>
                 </li>
                 <li class="breadcrumb-item">
-                  <nuxt-link to="/dashboard/admin">Admin</nuxt-link>
+                  <nuxt-link to="/admin">Admin</nuxt-link>
                 </li>
                 <li class="breadcrumb-item active">Dashboard</li>
               </ol>
@@ -38,9 +38,9 @@
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3>{{ totalCourses }}</h3>
 
-                  <p>Total Categories</p>
+                  <p>Total Courses</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -55,7 +55,7 @@
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>53<sup style="font-size: 20px">%</sup></h3>
+                  <h3>{{ totalVideos }}</h3>
 
                   <p>Total Videos</p>
                 </div>
@@ -81,12 +81,12 @@
                     data-toggle="modal"
                     data-target="#create-categories-modal"
                   >
-                    Create Categories
+                    Create Courses
                   </button>
                 </div>
 
                 <div id="create-categories-modal" class="modal fade">
-                  <CategoryModal />
+                  <CourseModal />
                 </div>
               </div>
             </section>
@@ -131,7 +131,41 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ store }) {
+    try {
+      const getCourses = store.getters['course/getAllCourses']
+      const courses = getCourses()
+
+      if (!courses.length) {
+        await store.dispatch('course/getAllCourses')
+      }
+
+      const getVideos = store.getters['course/getAllVideos']
+      const videos = getVideos()
+
+      if (!videos.length) {
+        await store.dispatch('course/getAllVideos')
+      }
+    } catch (error) {
+      console.log(error, 'error')
+    }
+  },
+  computed: {
+    totalCourses() {
+      if (this.$store.state.course.allCourses)
+        return this.$store.state.course.allCourses.length
+      return 0
+    },
+
+    totalVideos() {
+      if (this.$store.state.course.videos) {
+        return this.$store.state.course.videos.length
+      }
+      return 0
+    },
+  },
+}
 </script>
 
 <style></style>

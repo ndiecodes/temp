@@ -195,6 +195,10 @@ class Auth {
         tokenType: 'Brearer ',
       })
     }
+    return res.json({
+      success: false,
+      message: 'Log in failed',
+    })
   }
 
   //   static async deleteAccount(req, res) {
@@ -212,7 +216,13 @@ class Auth {
   //       })
   //   }
 
-  //   static async logout(req, res) {}
+  static logout(req, res) {
+    req.logout()
+    return res.json({
+      success: true,
+      message: 'Log out',
+    })
+  }
   //   static async settings(req, res) {}
 
   static async _hashPassword(password) {

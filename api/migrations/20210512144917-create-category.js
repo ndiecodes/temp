@@ -27,6 +27,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.BOOLEAN,
       },
+      slug: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,

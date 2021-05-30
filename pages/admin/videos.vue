@@ -16,7 +16,7 @@
                   <nuxt-link to="/">Home</nuxt-link>
                 </li>
                 <li class="breadcrumb-item">
-                  <nuxt-link to="/dashboard/admin">Admin</nuxt-link>
+                  <nuxt-link to="/admin">Admin</nuxt-link>
                 </li>
                 <li class="breadcrumb-item active">Videos</li>
               </ol>
@@ -33,7 +33,7 @@
       <section class="content">
         <div class="container-fluid">
           <!-- Main row -->
-          <Courses :edit="true" />
+          <Videos />
         </div>
         <!-- /.container-fluid -->
       </section>
@@ -51,10 +51,11 @@
 export default {
   async asyncData({ store }) {
     try {
-      const getCourses = store.getters['course/getAllCourses']
-      const courses = getCourses()
-      if (!courses.length) {
-        await store.dispatch('course/getAllCourses')
+      const getVideos = store.getters['course/getAllVideos']
+      const videos = getVideos()
+
+      if (!videos.length) {
+        await store.dispatch('course/getAllVideos')
       }
     } catch (error) {
       console.log(error, 'error')

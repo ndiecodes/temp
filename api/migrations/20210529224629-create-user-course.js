@@ -1,40 +1,23 @@
 'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Videos', {
+    await queryInterface.createTable('UserCourses', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      title: {
-        type: Sequelize.STRING,
-      },
-      description: {
-        allowNull: true,
-        type: Sequelize.TEXT,
-      },
-      summary: {
-        allowNull: true,
-        type: Sequelize.TEXT,
-      },
-      vimeoId: {
-        type: Sequelize.STRING,
-      },
-      slug: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-      },
-      section: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-      category_id: {
+      user_id: {
         type: Sequelize.INTEGER,
       },
-      premium: {
-        type: Sequelize.BOOLEAN,
+      course_id: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
+      },
+      current_video_id: {
+        allowNull: true,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -47,6 +30,6 @@ module.exports = {
     })
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Videos')
+    await queryInterface.dropTable('UserCourses')
   },
 }

@@ -45,9 +45,9 @@
             </nuxt-link>
           </li>
           <li class="nav-item">
-            <nuxt-link :to="{ name: 'admin-categories' }" class="nav-link">
+            <nuxt-link :to="{ name: 'admin-courses' }" class="nav-link">
               <i class="fas fa-file-alt nav-icon"></i>
-              <p>Categories</p>
+              <p>Courses</p>
             </nuxt-link>
           </li>
           <li class="nav-item">

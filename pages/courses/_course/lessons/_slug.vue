@@ -9,7 +9,7 @@
             >
             <span class="px-2">
               <i class="fas fa-angle-right px-1"></i>
-              <nuxt-link :to="'/courses/' + course.id">{{
+              <nuxt-link :to="'/courses/' + course.slug">{{
                 course.title
               }}</nuxt-link></span
             >
@@ -17,7 +17,7 @@
             <span class="px-1">
               <i class="fas fa-angle-right px-1"></i>
               <nuxt-link
-                :to="'/courses/' + course.id + '/lessons/' + video.id"
+                :to="'/courses/' + course.slug + '/lessons/' + video.slug"
                 >{{ video.title }}</nuxt-link
               ></span
             >
@@ -71,20 +71,7 @@
 
 <script>
 export default {
-  // beforeRouteEnter(to, from, next) {
-  //   // called before the route that renders this component is confirmed.
-  //   // does NOT have access to `this` component instance,
-  //   // because it has not been created yet when this guard is called!
-  //   next()
-  // },
   async beforeRouteUpdate(to, from, next) {
-    // called when the route that renders this component has changed.
-    // This component being reused (by using an explicit `key`) in the new route or not doesn't change anything.
-    // For example, for a route with dynamic params `/foo/:id`, when we
-    // navigate between `/foo/1` and `/foo/2`, the same `Foo` component instance
-    // will be reused (unless you provided a `key` to `<router-view>`), and this hook will be called when that happens.
-    // has access to `this` component instance.
-
     const getCourse = await this.$store.getters['course/getCourse']
     let course = await getCourse(to.params.course)
     if (!course) {
@@ -96,13 +83,6 @@ export default {
     const getVideo = await this.$store.getters['course/getVideo']
     this.video = await getVideo(to.params.course, to.params.slug)
 
-    // console.log(to, from)
-    next()
-  },
-  beforeRouteLeave(to, from, next) {
-    // called when the route that renders this component is about to
-    // be navigated away from.
-    // has access to `this` component instance.
     next()
   },
   layout: 'lesson',

@@ -7,6 +7,13 @@ export default ($axios) => ({
       .catch((error) => Promise.reject(error.response))
   },
 
+  videos() {
+    return $axios
+      .get(`/api/v1/secure/videos`)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error.response))
+  },
+
   show(id) {
     return $axios
       .get(`${resource}/${id}`)
@@ -16,14 +23,29 @@ export default ($axios) => ({
 
   create(payload) {
     return $axios
-      .post(`/api/v1/secure/courses`, payload)
+      .post(`/api/v1/secure/videos`, payload)
       .then((response) => response.data)
       .catch((error) => Promise.reject(error.response))
   },
 
-  createCategory(payload) {
+  createCourse(payload) {
     return $axios
-      .post(`/api/v1/secure/categories`, payload)
+      .post(`/api/v1/secure/courses`, payload)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error))
+  },
+
+  updateVideo(payload) {
+    console.log(payload)
+    return $axios
+      .patch(`/api/v1/secure/videos/${payload.id}`, payload)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error.response))
+  },
+
+  updateCourse(payload) {
+    return $axios
+      .patch(`/api/v1/secure/courses/${payload.id}`, payload)
       .then((response) => response.data)
       .catch((error) => Promise.reject(error))
   },

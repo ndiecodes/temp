@@ -32,7 +32,7 @@
             <span>
               <i class="fas fa-play"></i>
               <nuxt-link
-                :to="'/courses/' + course.id + '/lessons/' + video.id"
+                :to="'/courses/' + course.slug + '/lessons/' + video.slug"
                 >{{ video.title }}</nuxt-link
               ></span
             >

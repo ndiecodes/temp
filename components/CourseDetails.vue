@@ -9,14 +9,15 @@
         </p>
         <div class="d-flex justify-content-center text-white mt-1">
           <span class="d-block pl-2"
-            ><i class="fas fa-play-circle"></i> 12 lessions</span
+            ><i class="fas fa-play-circle"></i>
+            {{ totalLessons }} lessions</span
           >
           <span class="pl-2"><i class="far fa-clock"></i> 10 hours</span>
           <span class="pl-2">Beginner</span>
         </div>
       </div>
       <div>
-        <Button :link="'/courses/lessons/test'">Start Learning Now</Button>
+        <Button :link="link">Start Learning Now</Button>
       </div>
     </div>
   </div>
@@ -28,6 +29,17 @@ export default {
     course: {
       type: Object,
       default: () => {},
+    },
+  },
+
+  computed: {
+    link() {
+      return `/courses/${this.course.slug}/lessons/${this.course.Videos[0].slug}`
+    },
+
+    totalLessons() {
+      if (this.course.Videos) return this.course.Videos.length
+      return 0
     },
   },
 }
