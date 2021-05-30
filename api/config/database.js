@@ -7,6 +7,7 @@ module.exports = {
     database: process.env.DB_NAME || 'blockvilla-api-db',
     host: process.env.DB_HOSTNAME || '127.0.0.1',
     dialect: process.env.DB_DIALECT || 'mysql', // Remove MYSQL
+    use_env_variable: process.env.DATABASE_URL || null,
   },
 
   test: {
@@ -15,6 +16,7 @@ module.exports = {
     database: process.env.DB_NAME || 'blockvilla-api-db',
     host: process.env.DB_HOSTNAME || '127.0.0.1',
     dialect: process.env.DB_DIALECT || 'mysql',
+    use_env_variable: process.env.DATABASE_URL || null,
   },
 
   production: {
@@ -23,6 +25,7 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOSTNAME,
     dialect: process.env.DB_DIALECT || 'postgres',
+    use_env_variable: process.env.DATABASE_URL || null,
   },
   use_env_variable: process.env.DATABASE_URL || null,
 }
