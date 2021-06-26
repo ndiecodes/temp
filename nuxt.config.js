@@ -26,32 +26,7 @@ export default {
         href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css',
       },
 
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/plugins/icheck-bootstrap/icheck-bootstrap.min.css',
-      // },
-
       { rel: 'stylesheet', href: '/adminlte.css' },
-
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
-      // },
-
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/plugins/daterangepicker/daterangepicker.css',
-      // },
-
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/plugins/summernote/summernote-bs4.min.css',
-      // },
-
-      // {
-      //   rel: 'stylesheet',
-      //   href: '/plugins/jqvmap/jqvmap.min.css',
-      // },
 
       {
         rel: 'stylesheet',
@@ -166,9 +141,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
-  // server: {
-  //   // port: 8000, // default: 3000
-  //   host: '0.0.0.0', // default: localhost,
-  //   // timing: false,
-  // },
+  server: {
+    // port: 8000, // default: 3000
+    host: '0.0.0.0', // default: localhost,
+    // timing: false,
+  },
 }
