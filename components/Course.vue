@@ -10,7 +10,7 @@
         <nuxt-link :to="'/courses/' + course.slug">
           <h4>{{ course.title }}</h4>
           <p class="mt-2">
-            {{ course.description }}
+            {{ course.summary }}
           </p>
         </nuxt-link>
         <div class="d-flex justify-content-between text-black-50 mt-1">

@@ -9,6 +9,7 @@
             <div class="col-sm-6">
               <h1 class="m-0">Dashboard</h1>
             </div>
+
             <!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -32,6 +33,14 @@
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
+          <button
+            type="button"
+            class="btn bg-gradient-danger text-white mt-3 mb-3"
+            data-toggle="modal"
+            data-target="#create-price-modal"
+          >
+            Set Pricing
+          </button>
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-6 col-6">
@@ -126,6 +135,8 @@
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
+
+    <AdminPrice />
   </div>
   <!-- ./wrapper -->
 </template>

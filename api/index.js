@@ -35,3 +35,13 @@ if (require.main === module) {
     console.log(`API server listening on port ${port}`)
   })
 }
+
+/**
+ *
+ * //Create a Transaction table => UserID, payment_date, amount, duration
+ * //Update User Table with premium_expiration_date, grace_period
+ * Create a Form in Admin to Set Pricing => monthly:15, yearly:135, saves: 50%
+ * //Create a Table to store Pricing data
+ * Integrate Crypto Payment API
+ *
+ */

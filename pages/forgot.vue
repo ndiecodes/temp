@@ -13,7 +13,7 @@
             <UnauthButton>Recover Password</UnauthButton>
             <p class="mt-4">
               New to Blockvilla?
-              <nuxt-link to="/register">Create account</nuxt-link>
+              <nuxt-link to="/plans">Create account</nuxt-link>
             </p>
           </form>
         </UnauthForm>

@@ -136,9 +136,14 @@ export default {
     async createVideo() {
       const data = await this.$store.dispatch('course/createVideo', this.video)
 
-      const { success, message } = data
-      this.success = success
-      this.message = message
+      if (data) {
+        const { success, message } = data
+        this.success = success
+        this.message = message
+      } else {
+        this.success = false
+        this.message = 'Internal server error, please try again'
+      }
     },
   },
 }

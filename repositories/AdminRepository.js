@@ -36,7 +36,6 @@ export default ($axios) => ({
   },
 
   updateVideo(payload) {
-    console.log(payload)
     return $axios
       .patch(`/api/v1/secure/videos/${payload.id}`, payload)
       .then((response) => response.data)
@@ -52,5 +51,19 @@ export default ($axios) => ({
 
   delete(id) {
     return $axios.delete(`${resource}/${id}`)
+  },
+
+  setPrice(price) {
+    return $axios
+      .post(`/api/v1/secure/prices`, price)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error.response))
+  },
+
+  getPrices() {
+    return $axios
+      .get(`/api/v1/prices`)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error.response))
   },
 })

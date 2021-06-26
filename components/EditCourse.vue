@@ -14,7 +14,7 @@
           </button>
         </div>
         <div class="modal-body p-0">
-          <form>
+          <form @submit.prevent="updateCourse">
             <div class="card-body">
               <div class="form-group">
                 <label for="title">Title</label>
@@ -108,15 +108,20 @@ export default {
   },
 
   methods: {
-    async updateVideo() {
+    async updateCourse() {
       const data = await this.$store.dispatch(
         'course/updateCourse',
         this.editCourse
       )
 
-      const { success, message } = data
-      this.success = success
-      this.message = message
+      if (data) {
+        const { success, message } = data
+        this.success = success
+        this.message = message
+      } else {
+        this.success = false
+        this.message = 'Internal server error, please try again'
+      }
     },
   },
 }

@@ -1,5 +1,6 @@
 export const state = () => ({
   user: [],
+  prices: [],
 })
 
 export const mutations = {
@@ -8,6 +9,20 @@ export const mutations = {
   },
   storeTopMerchants(state, merchants) {
     state.topMerchants = merchants
+  },
+
+  STORE_PRICES(state, prices) {
+    state.prices = prices
+  },
+}
+
+export const getters = {
+  getPrices: (state) => () => {
+    return state.prices
+  },
+
+  getPriceByType: (state) => (type) => {
+    return state.prices.find((price) => price.type === type)
   },
 }
 
@@ -19,6 +34,26 @@ export const actions = {
         // form.id = data.data._id;
         // commit("storeUser", form);
         // Do something
+      }
+      return data
+    })
+  },
+
+  setPrice({ commit }, price) {
+    return this.$repositories.admin.setPrice(price).then((data) => {
+      const { success } = data
+      if (success) {
+        // commit('STORE_PRICE', data.price)
+      }
+      return data
+    })
+  },
+
+  getPrices({ commit }, price) {
+    return this.$repositories.admin.getPrices().then((data) => {
+      const { success } = data
+      if (success) {
+        commit('STORE_PRICES', data.prices)
       }
       return data
     })

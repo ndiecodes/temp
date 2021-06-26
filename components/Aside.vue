@@ -4,7 +4,7 @@
     <!-- Brand Logo -->
     <nuxt-link to="/" class="brand-link">
       <img
-        src="/img/logo-alt 1.png"
+        src="/img/logo.png"
         alt="Logo"
         class="brand-image"
         style="opacity: 0.8"
@@ -24,7 +24,7 @@
           />
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ $auth.user.name }}</a>
         </div>
       </div>
 

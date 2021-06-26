@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nuxtjs/auth-next": "5.0.0-1607693598.34d83ea",
+    "@nuxtjs/auth-next": "^5.0.0-1607693598.34d83ea",
     "@nuxtjs/axios": "^5.13.1",
     "@vimeo/player": "^2.15.0",
     "bcrypt": "^5.0.1",
@@ -22,15 +22,15 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "nuxt": "^2.15.3",
+    "mysql2": "^2.2.5",
+    "nuxt": "^2.15.7",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
     "slugify": "^1.5.3",
     "vimeo": "^2.1.1",
-    "vuex-persistedstate": "*",
-    "sequelize-cli": "^6.2.0",
-    "mysql2": "^2.2.5"
+    "vuex-persistedstate": "*"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

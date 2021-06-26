@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   middleware: ['auth'],
   auth: 'guest',
@@ -64,14 +65,35 @@ export default {
       default: 'Create Account',
     },
   },
+
+  async asyncData({ store }) {
+    try {
+      const getPrices = store.getters['user/getPrices']
+      const prices = getPrices()
+      if (!prices.length) {
+        await store.dispatch('user/getPrices')
+      }
+    } catch (error) {
+      console.log(error, 'error')
+    }
+  },
   data() {
     return {
       errors: {},
       user: {},
     }
   },
+
+  computed: {
+    ...mapState({
+      prices: (state) => {
+        return [...state.user.prices].sort((a, b) => a.amount - b.amount)
+      },
+    }),
+  },
   methods: {
     async register() {
+      this.user.roles = 'user'
       const res = await this.$store.dispatch('user/register', this.user)
       if (!res.success) {
         const { data, message } = res.data
@@ -82,14 +104,39 @@ export default {
           }
         }
         this.errors = o
+        return
       }
-      //   if (this.validateEmail(this.user.email)) {
-      //     this.suscribeNewsletter()
-      //   } else this.errors.email = 'Enter a valid email'
+
+      // Redirect to Checkout here
+      if (this.$route.query.type === 'free') {
+        await this.login()
+      }
+
+      const getPrice = this.$store.getters['user/getPriceByType']
+      const price = getPrice(this.$route.query.type)
+      if (price) {
+        this.processCheckout()
+      }
+
+      await this.login()
     },
-    // suscribeNewsletter() {
-    //   this.$refs.form.submit()
-    // },
+
+    async login() {
+      try {
+        return await this.$store.dispatch('user/login', this.user)
+      } catch (error) {
+        this.error_msg = 'Password/email combination is incorrect'
+      }
+    },
+
+    processCheckout() {
+      try {
+        // Checkout here
+      } catch (error) {
+        this.error_msg = 'Could not checkout, please try again later'
+      }
+    },
+
     validateEmail(email) {
       if (email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
