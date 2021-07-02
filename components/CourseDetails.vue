@@ -17,7 +17,8 @@
         </div>
       </div>
       <div>
-        <Button :link="link">Start Learning Now</Button>
+        <Button v-if="course.premium" :link="link">Start Learning Now</Button>
+        <Button else :link="previewLink">Start Learning Now</Button>
       </div>
     </div>
   </div>
@@ -35,6 +36,11 @@ export default {
   computed: {
     link() {
       return `/courses/${this.course.slug}/lessons/${this.course.Videos[0].slug}`
+    },
+
+    previewLink() {
+      const freeVideos = this.course.Videos.filter((video) => !video.premium)
+      return `/courses/${this.course.slug}/lessons/${freeVideos[0].slug}`
     },
 
     totalLessons() {

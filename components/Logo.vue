@@ -1,6 +1,6 @@
 <template>
   <nuxt-link class="navbar-brand" to="/">
-    <img src="/img/logo-alt 1.png" alt="" />
+    <img src="/img/logo.png" alt="Blockvilla Logo" />
   </nuxt-link>
 </template>
 
@@ -12,7 +12,7 @@
 
 @keyframes appear {
   0% {
-    opacity: 0;
+    /* opacity: 0; */
   }
 }
 </style>

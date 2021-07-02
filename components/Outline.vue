@@ -24,19 +24,8 @@
         data-bs-parent="#accordionExample"
       >
         <div class="accordion-body row">
-          <div
-            v-for="(video, index) in videos"
-            :key="index"
-            class="d-flex justify-content-between mt-1 mb-4"
-          >
-            <span>
-              <i class="fas fa-play"></i>
-              <nuxt-link
-                :to="'/courses/' + course.slug + '/lessons/' + video.slug"
-                >{{ video.title }}</nuxt-link
-              ></span
-            >
-            <span> 3:30</span>
+          <div v-for="(video, index) in videos" :key="index" class="">
+            <ListVideo :course="course" :video="video" />
           </div>
         </div>
       </div>
@@ -77,11 +66,6 @@ export default {
 </script>
 
 <style scoped>
-.accordion-body .d-flex > span,
-a {
-  color: rgb(145, 144, 144) !important;
-}
-
 .accordion-item h2 {
   background: #f0eef9 !important;
   border: 0;

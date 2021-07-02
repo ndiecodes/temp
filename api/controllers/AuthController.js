@@ -5,6 +5,7 @@ const User = require(path.join(__dirname, '../models')).User
 const jwt = require('jsonwebtoken')
 // const { Op } = require('sequelize')
 const jwtDecode = require('jwt-decode')
+const Price = require(path.join(__dirname, '../models')).Price
 // const Mail = require('../config/mail')
 // const forgotPassword = require('../../templates/mail/forgotPassword')
 
@@ -31,6 +32,7 @@ class Auth {
       return res.status(500).json({
         success: false,
         message: 'Internal Server Error Occured, Please try again',
+        error,
       })
     }
   }
@@ -201,20 +203,71 @@ class Auth {
     })
   }
 
-  //   static async deleteAccount(req, res) {
-  //     const user = await User.findOne({ id: { id: req.body.id } })
-  //     if (await user.destroy()) {
-  //       return res.status(200).json({
-  //         success: true,
-  //         message: 'Account deleted successfully',
-  //         user,
-  //       })
-  //     } else
-  //       return res.status(500).json({
-  //         success: false,
-  //         message: 'Account failed to delete, internal server error',
-  //       })
-  //   }
+  static async setPrice(req, res) {
+    console.log(req.body, 'SERVER')
+    if (req.user.roles.toLowerCase() !== 'admin') {
+      return res.status(401).json({
+        success: false,
+        message: "You're not authorized to create prices",
+      })
+    }
+    try {
+      // Check if exits
+      const price = await Price.findOne({
+        where: {
+          type: req.body.type,
+        },
+      })
+      if (price) {
+        // Update Price
+        await price.update(req.body)
+        return res.status(201).json({
+          success: true,
+          message: 'Price update successfully',
+          price,
+        })
+      }
+
+      // Create new Price
+      const newPrice = await Price.create(req.body)
+      if (newPrice) {
+        return res.status(201).json({
+          success: true,
+          message: 'New Price created successfully',
+          price: newPrice,
+        })
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error Occured, Please try again',
+        error,
+      })
+    }
+  }
+
+  static async prices(req, res) {
+    try {
+      const prices = await Price.findAll({})
+      if (prices) {
+        return res.status(200).json({
+          success: true,
+          message: 'Prices retrieved successfully',
+          prices,
+        })
+      } else
+        return res.status(404).json({
+          success: false,
+          message: 'Prices not found',
+        })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error Occured, Please try again',
+        error,
+      })
+    }
+  }
 
   static logout(req, res) {
     req.logout()
@@ -229,6 +282,21 @@ class Auth {
     const salt = await bcrypt.genSalt(process.env.SALT || 10)
     return await bcrypt.hash(password, salt)
   }
+
+  //   static async deleteAccount(req, res) {
+  //     const user = await User.findOne({ id: { id: req.body.id } })
+  //     if (await user.destroy()) {
+  //       return res.status(200).json({
+  //         success: true,
+  //         message: 'Account deleted successfully',
+  //         user,
+  //       })
+  //     } else
+  //       return res.status(500).json({
+  //         success: false,
+  //         message: 'Account failed to delete, internal server error',
+  //       })
+  //   }
 
   //   static async generateToken() {
   //     const secret = await crypto.randomBytes(20)

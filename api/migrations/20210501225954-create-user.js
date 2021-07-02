@@ -40,6 +40,15 @@ module.exports = {
         default: 'user',
         type: Sequelize.STRING,
       },
+      premium_expiration_date: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+
+      grace_period: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
       reset_password_token: { type: Sequelize.STRING, allowNull: true },
       reset_password_expires: { type: Sequelize.DATE, allowNull: true },
     })

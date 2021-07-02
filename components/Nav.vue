@@ -25,7 +25,7 @@
             <nuxt-link class="nav-link" to="/login">Sign In</nuxt-link>
           </li>
           <li v-if="!isAuthenticated" class="nav-item me-2">
-            <nuxt-link class="nav-link" to="/register">Get Started</nuxt-link>
+            <nuxt-link class="nav-link" to="/plans">Get Started</nuxt-link>
           </li>
           <li v-if="isAuthenticated" class="nav-item me-4">
             <nuxt-link class="nav-link" to="/courses">Courses</nuxt-link>
