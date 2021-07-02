@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'category_id',
       sourceKey: 'id',
     })
+    Course.hasMany(models.UserCourse, {
+      foreignKey: 'course_id',
+      sourceKey: 'id',
+    })
   }
 
   return Course

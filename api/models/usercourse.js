@@ -9,22 +9,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // UserCourse.hasOne(models.Course, {
-      //   foreignKey: 'course_id',
-      //   sourceKey: 'id',
-      // })
-      UserCourse.belongsTo(models.User, {
-        foreignKey: 'id',
+      UserCourse.belongsTo(models.Course, {
+        foreignKey: 'course_id',
         sourceKey: 'id',
       })
-      // UserCourse.hasOne(models.Video, {
-      //   foreignKey: 'current_video_id',
-      //   sourceKey: 'id',
-      // })
+      UserCourse.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        sourceKey: 'id',
+      })
+      UserCourse.belongsTo(models.Video, {
+        foreignKey: 'current_video_id',
+        sourceKey: 'id',
+      })
     }
   }
   UserCourse.init(
     {
+      user_id: DataTypes.INTEGER,
+      current_video_id: DataTypes.INTEGER,
+      course_id: DataTypes.INTEGER,
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
     },

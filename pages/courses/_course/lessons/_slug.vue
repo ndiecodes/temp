@@ -85,6 +85,7 @@ export default {
 
     next()
   },
+
   layout: 'lesson',
   middleware: ['auth'],
   auth: false,
@@ -120,6 +121,20 @@ export default {
     player.getVideoTitle().then(function (title) {
       console.log('title:', title)
     })
+
+    this.createOrUpdateUserCourse()
+  },
+
+  methods: {
+    async createOrUpdateUserCourse() {
+      if (this.$auth.loggedIn) {
+        const payload = {}
+        payload.user_id = this.$auth.user.id
+        payload.course_id = this.course.id
+        payload.current_video_id = this.video.id
+        await this.$store.dispatch('course/createUserCourse', payload)
+      }
+    },
   },
 }
 </script>

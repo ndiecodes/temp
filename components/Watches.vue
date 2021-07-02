@@ -17,16 +17,19 @@
         >
       </div>
     </div>
-    <Watched v-for="(item, index) in courses" :key="index" />
+    <Watched v-for="(item, index) in courses" :key="index" :course="item" />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      courses: [{}, {}, {}, {}, {}, {}],
-    }
+  computed: {
+    ...mapState({
+      courses: (state) => {
+        return state.course.userCourses
+      },
+    }),
   },
 }
 </script>

@@ -5,6 +5,7 @@ export const state = () => ({
   allCourses: [],
   videos: [],
   video: [],
+  userCourses: [],
 })
 
 export const mutations = {
@@ -29,11 +30,19 @@ export const mutations = {
   storeCategory(state, category) {
     state.category = category
   },
+
+  storeAllUserCourses(state, courses) {
+    state.userCourses = courses
+  },
 }
 
 export const getters = {
   getCourses: (state) => () => {
     return state.courses
+  },
+
+  getUserCourses: (state) => () => {
+    return state.userCourses
   },
 
   getAllCourses: (state) => () => {
@@ -95,6 +104,19 @@ export const actions = {
       .catch((error) => console.log(error))
   },
 
+  getAllUserCourses({ dispatch, commit }) {
+    return this.$repositories.course
+      .userCourses(this.$auth.user.id)
+      .then((data) => {
+        const { success } = data
+        if (success) {
+          commit('storeAllUserCourses', data.courses)
+        }
+        return data
+      })
+      .catch((error) => console.log(error))
+  },
+
   getAllVideos({ dispatch, commit }) {
     return this.$repositories.admin
       .videos()
@@ -129,6 +151,20 @@ export const actions = {
         const { success } = data
         if (success) {
           commit('storeCategory', data.course)
+        }
+        return data
+      })
+      .catch((error) => console.log(error, 'error'))
+  },
+
+  createUserCourse({ dispatch, commit }, payload) {
+    return this.$repositories.course
+      .createUserCourse(payload)
+      .then((data) => {
+        const { success } = data
+        if (success) {
+          console.log(data)
+          // commit('storeCategory', data.course)
         }
         return data
       })

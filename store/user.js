@@ -7,9 +7,6 @@ export const mutations = {
   storeUser(state, user) {
     state.user = user
   },
-  storeTopMerchants(state, merchants) {
-    state.topMerchants = merchants
-  },
 
   STORE_PRICES(state, prices) {
     state.prices = prices

@@ -1,6 +1,7 @@
 const slugify = require('slugify')
 const Video = require('../models').Video
 const Course = require('../models').Course
+const UserCourse = require('../models').UserCourse
 
 // const Vimeo = require('../services/Vimeo')
 
@@ -13,6 +14,53 @@ class CourseController {
         offset: page,
         limit: size,
         include: [
+          {
+            model: Video,
+            required: true,
+          },
+        ],
+      })
+
+      if (courses) {
+        return res.status(200).json({
+          success: true,
+          message: 'Courses retrieved successfully',
+          courses,
+        })
+      } else
+        return res.status(404).json({
+          success: false,
+          message: 'Courses not found',
+        })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error Occured, Please try again',
+        // error,
+      })
+    }
+  }
+
+  static async userCourses(req, res) {
+    if (req.user.id !== parseInt(req.params.id)) {
+      return res.status(401).json({
+        success: false,
+        message: "You're not authorized",
+      })
+    }
+
+    try {
+      const page = req.query.page || 0
+      const size = req.query.size || 10
+      const courses = await UserCourse.findAll({
+        offset: page,
+        limit: size,
+        where: { user_id: req.params.id },
+        include: [
+          {
+            model: Course,
+            required: true,
+          },
           {
             model: Video,
             required: true,
@@ -266,7 +314,7 @@ class CourseController {
 
     try {
       const video = await Video.findOne({ where: { id: req.params.id } })
-      console.log(video)
+
       await video.update(req.body)
       return res.status(200).json({
         success: true,
@@ -305,6 +353,47 @@ class CourseController {
         error,
       })
     }
+  }
+
+  static async createUserCourse(req, res) {
+    if (req.user.id !== parseInt(req.params.id)) {
+      return res.status(401).json({
+        success: false,
+        message: "You're not authorized",
+      })
+    }
+
+    // eslint-disable-next-line camelcase
+    const { user_id, course_id, current_video_id } = req.body
+
+    // Check if User already has course
+    const course = await UserCourse.findOne({ where: { user_id, course_id } })
+    if (course) {
+      await course.update({ current_video_id })
+      return res.status(200).json({
+        success: true,
+        message: 'User course updated successfully',
+        course,
+      })
+    }
+
+    const userCourse = await UserCourse.create({
+      user_id,
+      course_id,
+      current_video_id,
+    })
+    if (userCourse) {
+      return res.status(201).json({
+        success: true,
+        message: 'User Course Created successfully',
+        userCourse,
+      })
+    }
+
+    return res.status(401).json({
+      success: false,
+      msg: 'User Course not created',
+    })
   }
 }
 
