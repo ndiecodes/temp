@@ -62,6 +62,15 @@ export const getters = {
 
     if (course) return course.Videos.find((video) => video.slug === videoSlug)
   },
+
+  getNextVideo: (state) => (course, videoSlug) => {
+    if (course) {
+      const index = course.Videos.findIndex((video) => video.slug === videoSlug)
+      if (index >= 0 && index < course.Videos.length - 1)
+        return course.Videos[index + 1]
+    }
+    return null
+  },
 }
 
 export const actions = {
@@ -122,7 +131,6 @@ export const actions = {
       .videos()
       .then((data) => {
         const { success } = data
-        // console.log(data)
         if (success) {
           commit('storeAllVideos', data.videos)
         }
@@ -161,11 +169,6 @@ export const actions = {
     return this.$repositories.course
       .createUserCourse(payload)
       .then((data) => {
-        const { success } = data
-        if (success) {
-          console.log(data)
-          // commit('storeCategory', data.course)
-        }
         return data
       })
       .catch((error) => console.log(error, 'error'))
