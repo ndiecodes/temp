@@ -204,7 +204,6 @@ class Auth {
   }
 
   static async setPrice(req, res) {
-    console.log(req.body, 'SERVER')
     if (req.user.roles.toLowerCase() !== 'admin') {
       return res.status(401).json({
         success: false,

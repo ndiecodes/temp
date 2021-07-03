@@ -6,11 +6,11 @@
         alt=""
       />
       <div class="px-3 py-4">
-        <h4>Laravel 8 From Scratch</h4>
+        <h4>{{ course.Course.title }}</h4>
         <Button
           class="d-block text-white text-uppercase"
           style="background: #011537; border-radius: 0 !important"
-          link="#"
+          :link="link"
           >Continue <i class="pl-2 fas fa-arrow-right"></i>
         </Button>
       </div>
@@ -19,7 +19,21 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    course: {
+      type: Object,
+      default: () => {},
+    },
+  },
+
+  computed: {
+    link() {
+      const authURL = `/courses/${this.course.Course.slug}/lessons/${this.course.Video.slug}`
+      return authURL
+    },
+  },
+}
 </script>
 
 <style></style>

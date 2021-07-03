@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'category_id',
         targetKey: 'id',
       })
+
+      Video.hasMany(models.UserCourse, {
+        foreignKey: 'current_video_id',
+        sourceKey: 'id',
+      })
     }
   }
   Video.init(

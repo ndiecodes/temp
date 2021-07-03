@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       reset_password_token: DataTypes.STRING,
       reset_password_expires: DataTypes.DATE,
       roles: DataTypes.STRING,
+      premium_expiration_date: DataTypes.DATE,
+      grace_period: DataTypes.DATE,
     },
     {
       underscored: false,

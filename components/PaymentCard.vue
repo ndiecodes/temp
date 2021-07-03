@@ -63,10 +63,7 @@
       </div>
       <div class="card-body">
         <nuxt-link
-          :to="{
-            path: 'register',
-            query: { type: duration },
-          }"
+          :to="url"
           class="card-lnk btn btn-block"
           :class="{ 'btn-light': preferred }"
           :style="[!preferred ? { background: '#011537', color: '#fff' } : {}]"
@@ -102,6 +99,18 @@ export default {
   },
 
   computed: {
+    url() {
+      if (this.$route.query.r === 'checkout' && this.$auth.loggedIn) {
+        return {
+          path: 'checkout',
+          query: { type: this.duration },
+        }
+      }
+      return {
+        path: 'register',
+        query: { type: this.duration },
+      }
+    },
     type() {
       if (this.duration === 'month') {
         return 'Pro Monthly'

@@ -11,7 +11,19 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ store }) {
+    try {
+      const getCourses = store.getters['course/getUserCourses']
+      const courses = getCourses()
+      if (!courses.length) {
+        await store.dispatch('course/getAllUserCourses')
+      }
+    } catch (error) {
+      console.log(error, 'error')
+    }
+  },
+}
 </script>
 
 <style lang="css" scoped></style>

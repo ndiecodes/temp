@@ -33,6 +33,7 @@
       >
         <div style="position: relative; padding-top: 56.25%">
           <iframe
+            v-if="video"
             :src="`https://player.vimeo.com/video/${video.vimeoId}`"
             style="
               position: absolute;
@@ -49,6 +50,7 @@
             allow="autoplay; encrypted-media"
             data-ready="true"
             width="100%"
+            data-vimeo-autoplay="true"
             height="100%"
           ></iframe>
         </div>
@@ -73,11 +75,11 @@
 export default {
   async beforeRouteUpdate(to, from, next) {
     const getCourse = await this.$store.getters['course/getCourse']
-    let course = await getCourse(to.params.course)
+    const course = await getCourse(to.params.course)
     if (!course) {
       await this.$store.dispatch('course/getCourses')
       const getCourse = await this.$store.getters['course/getCourse']
-      course = await getCourse(to.params.course)
+      this.course = await getCourse(to.params.course)
     }
 
     const getVideo = await this.$store.getters['course/getVideo']
@@ -85,6 +87,7 @@ export default {
 
     next()
   },
+
   layout: 'lesson',
   middleware: ['auth'],
   auth: false,
@@ -111,15 +114,40 @@ export default {
   mounted() {
     const iframe = document.querySelector('iframe')
     // eslint-disable-next-line no-undef
-    const player = new Vimeo.Player(iframe)
-
-    player.on('play', function () {
-      console.log('played the video!')
+    const player = new Vimeo.Player(iframe, {
+      autoplay: true,
+      responsive: true,
     })
 
-    player.getVideoTitle().then(function (title) {
-      console.log('title:', title)
+    let nextVideo = null
+    const _this = this
+    player.on('play', async function () {
+      // Search for next video and store next video
+      const getVideo = await _this.$store.getters['course/getNextVideo']
+      nextVideo = await getVideo(_this.course, _this.video.slug)
     })
+
+    player.on('ended', function () {
+      // Get slug and push route to Vue Router
+      if (nextVideo)
+        return _this.$router.push({
+          path: `/courses/${_this.course.slug}/lessons/${nextVideo.slug}`,
+        })
+    })
+
+    this.createOrUpdateUserCourse()
+  },
+
+  methods: {
+    async createOrUpdateUserCourse() {
+      if (this.$auth.loggedIn && this.course && this.video) {
+        const payload = {}
+        payload.user_id = this.$auth.user.id
+        payload.course_id = this.course.id
+        payload.current_video_id = this.video.id
+        await this.$store.dispatch('course/createUserCourse', payload)
+      }
+    },
   },
 }
 </script>

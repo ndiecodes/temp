@@ -5,6 +5,7 @@ export const state = () => ({
   allCourses: [],
   videos: [],
   video: [],
+  userCourses: [],
 })
 
 export const mutations = {
@@ -29,11 +30,19 @@ export const mutations = {
   storeCategory(state, category) {
     state.category = category
   },
+
+  storeAllUserCourses(state, courses) {
+    state.userCourses = courses
+  },
 }
 
 export const getters = {
   getCourses: (state) => () => {
     return state.courses
+  },
+
+  getUserCourses: (state) => () => {
+    return state.userCourses
   },
 
   getAllCourses: (state) => () => {
@@ -52,6 +61,15 @@ export const getters = {
     const course = state.courses.find((course) => course.slug === courseSlug)
 
     if (course) return course.Videos.find((video) => video.slug === videoSlug)
+  },
+
+  getNextVideo: (state) => (course, videoSlug) => {
+    if (course) {
+      const index = course.Videos.findIndex((video) => video.slug === videoSlug)
+      if (index >= 0 && index < course.Videos.length - 1)
+        return course.Videos[index + 1]
+    }
+    return null
   },
 }
 
@@ -95,12 +113,24 @@ export const actions = {
       .catch((error) => console.log(error))
   },
 
+  getAllUserCourses({ dispatch, commit }) {
+    return this.$repositories.course
+      .userCourses(this.$auth.user.id)
+      .then((data) => {
+        const { success } = data
+        if (success) {
+          commit('storeAllUserCourses', data.courses)
+        }
+        return data
+      })
+      .catch((error) => console.log(error))
+  },
+
   getAllVideos({ dispatch, commit }) {
     return this.$repositories.admin
       .videos()
       .then((data) => {
         const { success } = data
-        // console.log(data)
         if (success) {
           commit('storeAllVideos', data.videos)
         }
@@ -130,6 +160,15 @@ export const actions = {
         if (success) {
           commit('storeCategory', data.course)
         }
+        return data
+      })
+      .catch((error) => console.log(error, 'error'))
+  },
+
+  createUserCourse({ dispatch, commit }, payload) {
+    return this.$repositories.course
+      .createUserCourse(payload)
+      .then((data) => {
         return data
       })
       .catch((error) => console.log(error, 'error'))

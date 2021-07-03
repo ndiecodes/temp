@@ -16,6 +16,8 @@ module.exports = (app) => {
   router.patch('/secure/videos/:id', CourseController.editVideo)
   router.post('/secure/prices', AuthController.setPrice)
   router.get('/prices', AuthController.prices)
+  router.post('/secure/users/:id/courses', CourseController.createUserCourse)
+  router.get('/secure/users/:id/courses', CourseController.userCourses)
 
   app.use('/v1/', router)
 }
