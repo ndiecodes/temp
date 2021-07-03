@@ -27,10 +27,35 @@ export default {
       if (!this.video.premium) {
         return authURL
       }
-      if (this.video.premium && this.$auth.loggedIn) {
+      if (
+        this.video.premium &&
+        this.$auth.loggedIn &&
+        !this.isExpired(this.$auth.user.grace_period)
+      ) {
         return authURL
       }
+      if (
+        this.video.premium &&
+        this.$auth.loggedIn &&
+        this.isExpired(this.$auth.user.premium_expiration_date) &&
+        this.isExpired(this.$auth.user.grace_period)
+      ) {
+        return '/plans?r=checkout'
+      }
       return '/login'
+    },
+  },
+
+  methods: {
+    isExpired(date) {
+      if (!date) {
+        return true
+      }
+      if (new Date(date).getTime() < new Date().getTime()) {
+        return true
+      }
+
+      return false
     },
   },
 }
