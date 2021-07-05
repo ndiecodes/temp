@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const AuthController = require('../controllers/AuthController')
 const CourseController = require('../controllers/CourseController')
+const TransactionController = require('../controllers/TransactionController')
 
 module.exports = (app) => {
   const router = Router()
@@ -18,6 +19,9 @@ module.exports = (app) => {
   router.get('/prices', AuthController.prices)
   router.post('/secure/users/:id/courses', CourseController.createUserCourse)
   router.get('/secure/users/:id/courses', CourseController.userCourses)
+  router.post('/secure/transactions', TransactionController.create)
+  router.get('/secure/transactions/:hash', TransactionController.getByHash)
+  router.put('/secure/transactions/:id', TransactionController.update)
 
   app.use('/v1/', router)
 }

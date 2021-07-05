@@ -1,11 +1,16 @@
 export const state = () => ({
   user: [],
   prices: [],
+  transaction: [],
 })
 
 export const mutations = {
   storeUser(state, user) {
     state.user = user
+  },
+
+  STORE_TRANSACTION(state, transaction) {
+    state.transaction = transaction
   },
 
   STORE_PRICES(state, prices) {
@@ -20,6 +25,12 @@ export const getters = {
 
   getPriceByType: (state) => (type) => {
     return state.prices.find((price) => price.type === type)
+  },
+
+  getTransactionByHash: (state) => (hash) => {
+    if (state.transaction.hash === hash) {
+      return state.transaction
+    }
   },
 }
 
@@ -92,6 +103,36 @@ export const actions = {
         // Do something
       }
       return data
+    })
+  },
+
+  createTransaction({ dispatch, commit }, payload) {
+    return this.$repositories.user.createTransaction(payload).then((data) => {
+      const { success } = data
+      if (success) {
+        commit('STORE_TRANSACTION', data.transaction)
+      }
+      return data.transaction
+    })
+  },
+
+  updateTransaction({ dispatch, commit }, payload) {
+    return this.$repositories.user.updateTransaction(payload).then((data) => {
+      const { success } = data
+      if (success) {
+        commit('STORE_TRANSACTION', data.transaction)
+      }
+      return data.transaction
+    })
+  },
+
+  getTransactionByHash({ dispatch, commit }, hash) {
+    return this.$repositories.user.transactionByHash(hash).then((data) => {
+      const { success } = data
+      if (success) {
+        commit('STORE_TRANSACTION', data.transaction)
+      }
+      return data.transaction
     })
   },
 }

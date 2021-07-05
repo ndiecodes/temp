@@ -24,6 +24,14 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         default: false,
       },
+      naira: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      btc: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
