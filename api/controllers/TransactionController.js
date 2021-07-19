@@ -1,8 +1,43 @@
 const Transaction = require('../models').Transaction
+const User = require('../models').User
 const Price = require('../models').Price
 const Helpers = require('../utils/helper')
 
 class TransactionController {
+  static async transactions(req, res) {
+    try {
+      const page = req.query.page || 0
+      const size = req.query.size || 10
+      const transactions = await Transaction.findAll({
+        offset: page,
+        limit: size,
+        include: [
+          {
+            model: User,
+            required: true,
+          },
+        ],
+      })
+
+      if (transactions) {
+        return res.status(200).json({
+          success: true,
+          message: 'Transactions retrieved successfully',
+          transactions,
+        })
+      } else
+        return res.status(404).json({
+          success: false,
+          message: 'Transactions not found',
+        })
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Internal Server Error Occured, Please try again',
+      })
+    }
+  }
+
   static async create(req, res) {
     // eslint-disable-next-line camelcase
     const { user, type } = req.body
@@ -84,11 +119,35 @@ class TransactionController {
   static async update(req, res) {
     try {
       const transaction = await Transaction.findOne({
-        where: { id: req.params.id, user_id: req.body.user },
+        where: { id: parseInt(req.params.id), user_id: req.body.user },
       })
 
+      const { status } = req.body
+
+      if (status === 'Approved') {
+        const user = User.findOne({
+          id: transaction.user_id,
+        })
+
+        const expiredDate = new Date(user.premium_expiration_date)
+        const gracePeriodDate = new Date(user.grace_period)
+
+        const newExpiredDate = new Date(
+          expiredDate.setMonth(expiredDate.getMonth() + 6)
+        )
+
+        const newGracePeriodDate = new Date(
+          gracePeriodDate.setMonth(gracePeriodDate.getMonth() + 6)
+        )
+
+        await user.update({
+          premium_expiration_date: newExpiredDate,
+          grace_period: newGracePeriodDate,
+        })
+      }
+
       await transaction.update({
-        status: req.body.status,
+        status,
       })
       return res.status(200).json({
         success: true,
@@ -98,7 +157,7 @@ class TransactionController {
     } catch (error) {
       return res.status(401).json({
         success: false,
-        msg: 'Transaction not created',
+        msg: 'Transaction not updated',
         error,
       })
     }

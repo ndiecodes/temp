@@ -2,6 +2,7 @@ export const state = () => ({
   user: [],
   prices: [],
   transaction: [],
+  transactions: [],
 })
 
 export const mutations = {
@@ -13,6 +14,10 @@ export const mutations = {
     state.transaction = transaction
   },
 
+  STORE_TRANSACTIONS(state, transactions) {
+    state.transactions = transactions
+  },
+
   STORE_PRICES(state, prices) {
     state.prices = prices
   },
@@ -21,6 +26,10 @@ export const mutations = {
 export const getters = {
   getPrices: (state) => () => {
     return state.prices
+  },
+
+  getTransactions: (state) => () => {
+    return state.transactions
   },
 
   getPriceByType: (state) => (type) => {
@@ -133,6 +142,17 @@ export const actions = {
         commit('STORE_TRANSACTION', data.transaction)
       }
       return data.transaction
+    })
+  },
+
+  getTransactions({ dispatch, commit }, hash) {
+    return this.$repositories.admin.getTransactions().then((data) => {
+      const { success } = data
+      if (success) {
+        console.log(data.transactions)
+        commit('STORE_TRANSACTIONS', data.transactions)
+      }
+      return data
     })
   },
 }

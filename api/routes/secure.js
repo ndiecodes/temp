@@ -22,6 +22,7 @@ module.exports = (app) => {
   router.post('/secure/transactions', TransactionController.create)
   router.get('/secure/transactions/:hash', TransactionController.getByHash)
   router.put('/secure/transactions/:id', TransactionController.update)
+  router.get('/secure/transactions', TransactionController.transactions)
 
   app.use('/v1/', router)
 }
