@@ -56,6 +56,12 @@
               <p>Videos</p>
             </nuxt-link>
           </li>
+          <li class="nav-item">
+            <nuxt-link :to="{ name: 'admin-transactions' }" class="nav-link">
+              <i class="fas fa-file-alt nav-icon"></i>
+              <p>Transactions</p>
+            </nuxt-link>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

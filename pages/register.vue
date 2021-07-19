@@ -115,7 +115,9 @@ export default {
       const getPrice = this.$store.getters['user/getPriceByType']
       const price = getPrice(this.$route.query.type)
       if (price) {
-        this.processCheckout()
+        // Create Transaction here
+        const trx = this.createTransaction()
+        this.processCheckout(trx)
       }
 
       await this.login()
@@ -129,9 +131,26 @@ export default {
       }
     },
 
-    processCheckout() {
+    async createTransaction() {
+      const payload = {
+        user: this.$auth.user.id,
+        type: this.$route.query.type,
+        // amount:
+      }
+      try {
+        return await this.$store.dispatch('user/createTransaction', payload)
+      } catch (error) {
+        this.error_msg = 'Could not checkout, please try again later'
+      }
+    },
+
+    processCheckout(trx) {
       try {
         // Checkout here
+        this.$router.push({
+          path: 'checkout',
+          query: { type: this.$route.query.type, contract: trx.payment_id },
+        })
       } catch (error) {
         this.error_msg = 'Could not checkout, please try again later'
       }

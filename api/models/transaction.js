@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Transaction.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        sourceKey: 'id',
+      })
     }
   }
   Transaction.init(
@@ -17,6 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       payment_date: DataTypes.DATE,
       type: DataTypes.STRING,
       amount: DataTypes.DOUBLE,
+      hash: DataTypes.STRING,
+      status: DataTypes.STRING,
     },
     {
       sequelize,

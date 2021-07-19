@@ -66,4 +66,11 @@ export default ($axios) => ({
       .then((response) => response.data)
       .catch((error) => Promise.reject(error.response))
   },
+
+  getTransactions() {
+    return $axios
+      .get(`/api/v1/secure/transactions`)
+      .then((response) => response.data)
+      .catch((error) => Promise.reject(error.response))
+  },
 })

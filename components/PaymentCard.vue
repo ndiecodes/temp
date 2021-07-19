@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4 card-group">
+  <div class="col-md-4 card-group">
     <div class="card" :class="{ 'text-white custom-bg': preferred }">
       <div class="card-body">
         <p class="free" :class="{ 'text-white': preferred }">{{ type }}</p>

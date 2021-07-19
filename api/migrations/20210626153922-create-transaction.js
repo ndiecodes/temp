@@ -17,6 +17,13 @@ module.exports = {
       type: {
         type: Sequelize.STRING,
       },
+
+      hash: {
+        type: Sequelize.STRING,
+      },
+      status: {
+        type: Sequelize.STRING,
+      },
       amount: {
         type: Sequelize.DOUBLE,
       },
