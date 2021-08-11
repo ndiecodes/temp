@@ -96,7 +96,7 @@ export default {
       this.user.roles = 'user'
       const res = await this.$store.dispatch('user/register', this.user)
       if (!res.success) {
-        const { data, message } = res.data
+        const { data, message } = res
         const o = {}
         if (message === 'Validation failed') {
           for (const [key, value] of Object.entries(data.errors)) {
@@ -114,13 +114,12 @@ export default {
 
       const getPrice = this.$store.getters['user/getPriceByType']
       const price = getPrice(this.$route.query.type)
+
       if (price) {
         // Create Transaction here
-        const trx = this.createTransaction()
-        this.processCheckout(trx)
+        const trx = await this.createTransaction(res.user)
+        return this.processCheckout(trx)
       }
-
-      await this.login()
     },
 
     async login() {
@@ -131,9 +130,9 @@ export default {
       }
     },
 
-    async createTransaction() {
+    async createTransaction(user) {
       const payload = {
-        user: this.$auth.user.id,
+        user: user.id,
         type: this.$route.query.type,
         // amount:
       }
@@ -147,9 +146,9 @@ export default {
     processCheckout(trx) {
       try {
         // Checkout here
-        this.$router.push({
+        return this.$router.push({
           path: 'checkout',
-          query: { type: this.$route.query.type, contract: trx.payment_id },
+          query: { type: this.$route.query.type, contract: trx.hash },
         })
       } catch (error) {
         this.error_msg = 'Could not checkout, please try again later'

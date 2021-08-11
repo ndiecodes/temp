@@ -2,11 +2,13 @@
   <div class="col-md-4 card-group">
     <div class="card" :class="{ 'text-white custom-bg': preferred }">
       <div class="card-body">
-        <p class="free" :class="{ 'text-white': preferred }">{{ type }}</p>
+        <p class="free" :class="{ 'text-white': preferred }">
+          {{ price.type }}
+        </p>
         <div class="mt-0">
           <span class="text-4xl text-grey-darkest font-weight-bold"
-            >${{ price }}</span
-          ><span v-if="duration"> / {{ duration }}</span>
+            >${{ price.amount }}</span
+          ><span v-if="price.type"> / {{ price.type }}</span>
         </div>
       </div>
       <div class="card-body d-flex flex-column">
@@ -14,7 +16,7 @@
           <div style="width: 30px">
             <SVGIcon />
           </div>
-          <div v-if="premium" class="pl-3">All courses</div>
+          <div v-if="isPremium" class="pl-3">All courses</div>
           <div v-else class="pl-3">Free courses</div>
         </div>
 
@@ -22,18 +24,18 @@
           <div style="width: 30px">
             <SVGIcon />
           </div>
-          <div v-if="premium" class="pl-3">All tutorials</div>
+          <div v-if="isPremium" class="pl-3">All tutorials</div>
           <div v-else class="pl-3">Free tutorials</div>
         </div>
 
-        <div v-if="premium" class="d-flex mt-1 mb-1">
+        <div v-if="isPremium" class="d-flex mt-1 mb-1">
           <div style="width: 30px">
             <SVGIcon />
           </div>
           <div class="pl-3">Download lessons for offline learning</div>
         </div>
 
-        <div v-if="premium" class="d-flex mt-1 mb-1">
+        <div v-if="isPremium" class="d-flex mt-1 mb-1">
           <div style="width: 30px">
             <SVGIcon />
           </div>
@@ -77,19 +79,9 @@
 <script>
 export default {
   props: {
-    premium: {
-      type: Boolean,
-      default: false,
-    },
-
     price: {
-      type: Number,
-      default: 0,
-    },
-
-    preferred: {
-      type: Boolean,
-      default: false,
+      type: [Object, Array],
+      default: () => [],
     },
 
     duration: {
@@ -99,25 +91,38 @@ export default {
   },
 
   computed: {
+    isPremium() {
+      if (this.price > 0) {
+        return true
+      }
+      return false
+    },
+    preferred() {
+      return !!this.price.preferred
+    },
     url() {
       if (this.$route.query.r === 'checkout' && this.$auth.loggedIn) {
         return {
           path: 'checkout',
-          query: { type: this.duration },
+          query: { type: this.price.type },
         }
       }
       return {
         path: 'register',
-        query: { type: this.duration },
+        query: { type: this.price.type },
       }
     },
     type() {
-      if (this.duration === 'month') {
+      if (this.price.type === 'month') {
         return 'Pro Monthly'
       }
 
-      if (this.duration === 'year') {
+      if (this.price.type === 'year') {
         return 'Pro Yearly'
+      }
+
+      if (this.price.type === 'semiannually') {
+        return 'Pro Semi-Annually'
       }
 
       return 'Free'

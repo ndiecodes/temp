@@ -57,7 +57,7 @@
 </template>
 <script>
 export default {
-  async asyncData({ store, route }) {
+  async asyncData({ store, route, router }) {
     try {
       const getTransaction = store.getters['user/getTransactionByHash']
       let transaction = getTransaction(route.params.hash)
@@ -65,16 +65,20 @@ export default {
       const getPrices = store.getters['user/getPrices']
       const prices = getPrices()
 
-      if (!transaction && !prices.length) {
-        await store.dispatch('user/getTransactionByHash', route.params.hash)
+      if (!prices.length) {
         await store.dispatch('user/getPrices')
+      }
+
+      if (!transaction) {
+        await store.dispatch('user/getTransactionByHash', route.params.hash)
         transaction = getTransaction(route.params.hash)
       }
       const getPrice = store.getters['user/getPriceByType']
       const price = getPrice(transaction.type)
+
       return { transaction, price }
     } catch (error) {
-      console.log(error, 'error')
+      // console.log(error, 'error')
     }
   },
 }

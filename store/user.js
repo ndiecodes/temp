@@ -119,9 +119,9 @@ export const actions = {
     return this.$repositories.user.createTransaction(payload).then((data) => {
       const { success } = data
       if (success) {
-        commit('STORE_TRANSACTION', data.transaction)
+        commit('STORE_TRANSACTION', data.newtransaction)
       }
-      return data.transaction
+      return data.newtransaction
     })
   },
 
@@ -149,7 +149,6 @@ export const actions = {
     return this.$repositories.admin.getTransactions().then((data) => {
       const { success } = data
       if (success) {
-        console.log(data.transactions)
         commit('STORE_TRANSACTIONS', data.transactions)
       }
       return data

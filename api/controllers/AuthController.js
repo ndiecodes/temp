@@ -16,6 +16,9 @@ class Auth {
       req.body.password = await Auth._hashPassword(req.body.password)
 
       const result = await User.create(req.body)
+
+      // Handle Email Validation and duplicate
+
       if (result) {
         result.password = null
         return res.status(201).json({

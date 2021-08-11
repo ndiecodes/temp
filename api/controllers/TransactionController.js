@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const Transaction = require('../models').Transaction
 const User = require('../models').User
 const Price = require('../models').Price
@@ -93,11 +94,11 @@ class TransactionController {
   static async getByHash(req, res) {
     try {
       const transaction = await Transaction.findOne({
-        where: { hash: req.params.hash, user_id: req.user.id },
+        where: { hash: req.params.hash },
       })
 
       if (transaction) {
-        return res.status(201).json({
+        return res.status(200).json({
           success: true,
           message: 'Transaction retrieved successfully',
           transaction,
@@ -122,15 +123,40 @@ class TransactionController {
         where: { id: parseInt(req.params.id), user_id: req.body.user },
       })
 
+      if (transaction.status === 'Approved') {
+        return res.status(411).json({
+          success: false,
+          message: 'Transaction already approved',
+          transaction,
+        })
+      }
+
+      if (transaction.status === 'Rejected') {
+        return res.status(411).json({
+          success: false,
+          message: 'Transaction already rejected',
+          transaction,
+        })
+      }
+
       const { status } = req.body
 
       if (status === 'Approved') {
-        const user = User.findOne({
-          id: transaction.user_id,
+        const user = await User.findOne({
+          where: {
+            id: transaction.user_id,
+          },
         })
 
-        const expiredDate = new Date(user.premium_expiration_date)
-        const gracePeriodDate = new Date(user.grace_period)
+        let expiredDate = user.premium_expiration_date
+        if (!expiredDate) {
+          expiredDate = new Date()
+        }
+
+        let gracePeriodDate = user.grace_period
+        if (!gracePeriodDate) {
+          gracePeriodDate = new Date()
+        }
 
         const newExpiredDate = new Date(
           expiredDate.setMonth(expiredDate.getMonth() + 6)
@@ -140,9 +166,19 @@ class TransactionController {
           gracePeriodDate.setMonth(gracePeriodDate.getMonth() + 6)
         )
 
+        const premium_expiration_date = newExpiredDate
+          .toJSON()
+          .slice(0, 19)
+          .replace('T', ' ')
+
+        const grace_period = newGracePeriodDate
+          .toJSON()
+          .slice(0, 19)
+          .replace('T', ' ')
+
         await user.update({
-          premium_expiration_date: newExpiredDate,
-          grace_period: newGracePeriodDate,
+          premium_expiration_date,
+          grace_period,
         })
       }
 
@@ -155,7 +191,7 @@ class TransactionController {
         transaction,
       })
     } catch (error) {
-      return res.status(401).json({
+      return res.status(500).json({
         success: false,
         msg: 'Transaction not updated',
         error,

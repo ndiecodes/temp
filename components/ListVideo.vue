@@ -1,10 +1,12 @@
 <template>
   <div class="list d-flex justify-content-between mt-1 mb-4">
-    <span :class="{ premium: !video.premium }">
-      <i class="fas fa-play"></i>
-      <nuxt-link :to="redirect">{{ video.title }}</nuxt-link></span
-    >
-    <span> 3:30</span>
+    <span :class="{ premium: !video.premium }" class="span">
+      <i class="fab fa-youtube"></i>
+      <nuxt-link :to="redirect">{{ video.title }}</nuxt-link>
+      <span class="badge badge-pill badge-success">{{ premiumLabel }}</span>
+    </span>
+
+    <nuxt-link :to="redirect" class="btn btn-info">Start</nuxt-link>
   </div>
 </template>
 
@@ -44,6 +46,10 @@ export default {
       }
       return '/login'
     },
+
+    premiumLabel() {
+      return this.video.premium ? 'Paid' : 'Free'
+    },
   },
 
   methods: {
@@ -62,8 +68,8 @@ export default {
 </script>
 
 <style scoped>
-div.list > span,
-a {
+div.list .span,
+.span a {
   color: rgb(145, 144, 144) !important;
 }
 

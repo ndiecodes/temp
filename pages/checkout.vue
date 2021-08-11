@@ -91,6 +91,13 @@ export default {
     try {
       const getPrices = store.getters['user/getPrices']
       const prices = getPrices()
+
+      // const getTransactions = store.getters['user/getTransactions']
+      // const transactions = getTransactions()
+
+      // if (transactions.length) {
+      //   await store.dispatch('user/getTransactions')
+      // }
       if (!prices.length) {
         await store.dispatch('user/getPrices')
       }
@@ -132,6 +139,9 @@ export default {
   async created() {
     if (this.$auth.loggedIn) {
       await this.createTransaction()
+    } else {
+      // Mutate Transaction
+      this.getTransactionByHash(this.$route.query.contract)
     }
   },
 
@@ -139,7 +149,7 @@ export default {
     async confirm() {
       // Update Transaction and redirect
       const payload = {
-        user: this.$auth.user.id,
+        user: this.transaction.user_id,
         id: this.transaction.id,
         status: 'Processing',
       }
@@ -159,6 +169,14 @@ export default {
         return await this.$store.dispatch('user/createTransaction', payload)
       } catch (error) {
         this.error_msg = 'Could not checkout, please try again later'
+      }
+    },
+
+    async getTransactionByHash(hash) {
+      const getTransaction = this.$store.getters['user/getTransactionByHash']
+      const transaction = getTransaction(hash)
+      if (!transaction) {
+        await this.$store.dispatch('user/getTransactionByHash', hash)
       }
     },
     back() {
