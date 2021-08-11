@@ -9,16 +9,20 @@
         </p>
         <div class="d-flex justify-content-center text-white mt-1">
           <span class="d-block pl-2"
-            ><i class="fas fa-play-circle"></i>
-            {{ totalLessons }} lessions</span
+            ><i class="fas fa-play-circle"></i> {{ totalLessons }} lessons</span
           >
-          <span class="pl-2"><i class="far fa-clock"></i> 10 hours</span>
-          <span class="pl-2">Beginner</span>
+          <span class="pl-2"
+            ><i class="fab fa-youtube"></i> {{ premiumLabel }} Course</span
+          >
+
+          <!-- <span class="pl-2">Beginner</span> -->
         </div>
       </div>
       <div>
         <Button v-if="course.premium" :link="link">Start Learning Now</Button>
-        <Button else :link="previewLink">Start Learning Now</Button>
+        <Button v-if="!course.premium" :link="previewLink"
+          >Start Learning Now</Button
+        >
       </div>
     </div>
   </div>
@@ -36,6 +40,10 @@ export default {
   computed: {
     link() {
       return `/courses/${this.course.slug}/lessons/${this.course.Videos[0].slug}`
+    },
+
+    premiumLabel() {
+      return this.course.premium ? 'Paid' : 'Free'
     },
 
     previewLink() {

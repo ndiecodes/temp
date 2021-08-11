@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-4 py-3">
+  <div class="col-md-4 col-sm-12 col-xl-4 py-3">
     <div class="card1 shadow rounded border-0">
       <nuxt-link :to="'/courses/' + course.slug">
         <div class="card">
@@ -15,11 +15,10 @@
         </nuxt-link>
         <div class="d-flex justify-content-between text-black-50 mt-1">
           <span class="d-block"
-            ><i class="fas fa-play-circle"></i>
-            {{ totalLessons }} lessions</span
+            ><i class="fas fa-play-circle"></i> {{ totalLessons }} lessons</span
           >
-          <span><i class="far fa-clock"></i> 10 hours</span>
-          <span>Beginner</span>
+          <span><i class="fab fa-youtube"></i> {{ premiumLabel }}</span>
+          <!-- <span>Beginner</span> -->
         </div>
       </div>
     </div>
@@ -39,6 +38,10 @@ export default {
     totalLessons() {
       if (this.course.Videos) return this.course.Videos.length
       return 0
+    },
+
+    premiumLabel() {
+      return this.course.premium ? 'Paid Course' : 'Free Course'
     },
 
     banner() {

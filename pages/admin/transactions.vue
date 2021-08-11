@@ -49,20 +49,18 @@
               <td>{{ trx.hash }}</td>
               <td>$ {{ trx.amount }}</td>
               <td>{{ trx.status }}</td>
-              <td>
-                <button
-                  class="btn btn-success"
-                  @click="approve(trx.id, trx.user_id)"
-                >
-                  Approve
-                </button>
-                <button
-                  class="btn btn-danger"
-                  @click="reject(trx.id, trx.user_id)"
-                >
-                  Reject
-                </button>
-              </td>
+              <button
+                class="btn btn-success m-1"
+                @click="approve(trx.id, trx.user_id)"
+              >
+                Approve
+              </button>
+              <button
+                class="btn btn-danger"
+                @click="reject(trx.id, trx.user_id)"
+              >
+                Reject
+              </button>
             </tr>
           </table>
         </div>

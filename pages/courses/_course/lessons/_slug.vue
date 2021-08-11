@@ -22,7 +22,6 @@
               ></span
             >
           </div>
-          <span> 3:30</span>
         </div>
       </div>
     </section>

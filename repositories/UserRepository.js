@@ -43,19 +43,19 @@ export default ($axios) => ({
 
   createTransaction(payload) {
     return $axios
-      .post(`/api/v1/secure/transactions`, payload)
+      .post(`/api/v1/transactions`, payload)
       .then((response) => response.data)
       .catch((error) => Promise.resolve(error.response))
   },
   updateTransaction(payload) {
     return $axios
-      .put(`/api/v1/secure/transactions/${payload.id}`, payload)
+      .put(`/api/v1/transactions/${payload.id}`, payload)
       .then((response) => response.data)
       .catch((error) => Promise.resolve(error.response))
   },
   transactionByHash(hash) {
     return $axios
-      .get(`/api/v1/secure/transactions/${hash}`)
+      .get(`/api/v1/transactions/${hash}`)
       .then((response) => response.data)
       .catch((error) => Promise.resolve(error.response))
   },
