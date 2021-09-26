@@ -109,7 +109,7 @@ export default {
 
       // Redirect to Checkout here
       if (this.$route.query.type === 'free') {
-        await this.login()
+        return await this.login()
       }
 
       const getPrice = this.$store.getters['user/getPriceByType']
@@ -124,7 +124,10 @@ export default {
 
     async login() {
       try {
-        return await this.$store.dispatch('user/login', this.user)
+        await this.$store.dispatch('user/login', this.user)
+        return this.$router.push({
+          name: 'dashboard',
+        })
       } catch (error) {
         this.error_msg = 'Password/email combination is incorrect'
       }
