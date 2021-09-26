@@ -9,6 +9,7 @@ const config = require(path.join(__dirname, '/../config/database.js'))[env]
 const db = {}
 
 let sequelize
+
 if (config.use_env_variable) {
   sequelize = new Sequelize(config.use_env_variable)
 } else {

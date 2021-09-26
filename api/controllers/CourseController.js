@@ -33,10 +33,11 @@ class CourseController {
           message: 'Courses not found',
         })
     } catch (error) {
+console.log(error)
       return res.status(500).json({
         success: false,
         message: 'Internal Server Error Occured, Please try again',
-        // error,
+         error,
       })
     }
   }
