@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-md" :class="{ 'navbar-light': !color }">
+  <nav
+    class="navbar navbar-expand-md navbar-dark"
+    :class="{ 'navbar-light': !color }"
+  >
     <div class="container-fluid">
       <Logo />
       <button
@@ -96,5 +99,9 @@ export default {
 .navbar .navbar-nav a.nav-link {
   color: #fff;
   /* #011537; */
+}
+
+.navbar-dark {
+  background-color: #00336f;
 }
 </style>
