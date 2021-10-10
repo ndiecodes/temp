@@ -1,0 +1,61 @@
+body {
+  color: #303030;
+}
+.header {
+  background: no-repeat center center;
+  width: 100%;
+  color: #ffffff !important;
+}
+
+.b-radius {
+  border-radius: 0.5rem;
+}
+
+.banner {
+  padding: 0rem 1rem 5rem 1rem;
+}
+
+.navbar-light .navbar-nav a.nav-link {
+  color: #ffffff !important;
+}
+.bg__primary {
+  background-color: #00336f;
+  color: white !important;
+}
+
+.bg__primary--white {
+  background-color: #ffffff;
+  color: #011537 !important;
+}
+
+.site_img {
+  margin-bottom: -40px;
+}
+
+button {
+  padding: 2rem;
+}
+
+button:focus,
+button:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.card1:hover {
+  box-shadow: 0 14px 25px rgb(0 0 0 / 20%) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #011537;
+}
